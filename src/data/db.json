@@ -1,0 +1,113 @@
+{
+    "viajes": [
+        {
+            "id": 1,
+            "nombre": "Cancún Paradise",
+            "descripcion": "Descubre las playas de arena blanca y aguas cristalinas del Caribe mexicano. Disfruta de ruinas mayas, cenotes mágicos y la vibrante vida nocturna de la Riviera Maya. Un destino perfecto para quienes buscan sol, cultura y aventura en un solo lugar.",
+            "imagen": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=800&q=80",
+            "categoria": "Playa",
+            "precio_estimado": 1200,
+            "rating": 4.8
+        },
+        {
+            "id": 2,
+            "nombre": "Alpes Suizos",
+            "descripcion": "Vive la majestuosidad de los Alpes suizos con picos nevados, lagos cristalinos y pueblos de cuento. Ideal para senderismo en verano y esquí en invierno. La naturaleza en su máxima expresión con paisajes que quitan el aliento.",
+            "imagen": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800&q=80",
+            "categoria": "Montaña",
+            "precio_estimado": 2500,
+            "rating": 4.9
+        },
+        {
+            "id": 3,
+            "nombre": "Tokio Moderno",
+            "descripcion": "Sumérgete en la fascinante mezcla de tradición y tecnología de Tokio. Desde templos milenarios hasta rascacielos futuristas, pasando por la mejor gastronomía del mundo y una cultura pop única e inigualable.",
+            "imagen": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 1800,
+            "rating": 4.7
+        },
+        {
+            "id": 4,
+            "nombre": "Maldivas Dream",
+            "descripcion": "El paraíso terrenal por excelencia. Bungalows sobre aguas turquesas, arrecifes de coral vibrantes y atardeceres que parecen pintados. Una experiencia de lujo y tranquilidad absoluta en el Océano Índico.",
+            "imagen": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80",
+            "categoria": "Playa",
+            "precio_estimado": 3500,
+            "rating": 4.9
+        },
+        {
+            "id": 5,
+            "nombre": "Machu Picchu Trek",
+            "descripcion": "Camina por el legendario sendero inca hasta la ciudadela perdida de Machu Picchu. Una aventura épica entre montañas sagradas, bosques nubosos y ruinas que guardan los secretos de una civilización milenaria.",
+            "imagen": "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=800&q=80",
+            "categoria": "Montaña",
+            "precio_estimado": 1500,
+            "rating": 4.8
+        },
+        {
+            "id": 6,
+            "nombre": "París Romántico",
+            "descripcion": "La Ciudad de la Luz te espera con la Torre Eiffel, el Louvre, croissants recién hechos y paseos por el Sena. Arte, moda, gastronomía y romance se unen en cada rincón de esta ciudad icónica.",
+            "imagen": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 1600,
+            "rating": 4.6
+        },
+        {
+            "id": 7,
+            "nombre": "Bali Espiritual",
+            "descripcion": "Encuentra la paz interior en la isla de los dioses. Templos escondidos entre arrozales, playas volcánicas, yoga al amanecer y una espiritualidad que se respira en cada rincón. Bali transforma a todo aquel que la visita.",
+            "imagen": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80",
+            "categoria": "Playa",
+            "precio_estimado": 1100,
+            "rating": 4.7
+        },
+        {
+            "id": 8,
+            "nombre": "Patagonia Salvaje",
+            "descripcion": "Explora los confines del mundo con glaciares milenarios, torres de granito y lagos de un azul imposible. La Patagonia argentina y chilena ofrece una naturaleza imponente y salvaje como ningún otro lugar del planeta.",
+            "imagen": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
+            "categoria": "Montaña",
+            "precio_estimado": 2000,
+            "rating": 4.8
+        },
+        {
+            "id": 9,
+            "nombre": "Nueva York Urban",
+            "descripcion": "La ciudad que nunca duerme te ofrece Broadway, Central Park, museos de clase mundial y una energía inigualable. Pizza en cada esquina, vistas desde rascacielos y la diversidad cultural más rica del planeta.",
+            "imagen": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 2200,
+            "rating": 4.5
+        },
+        {
+            "id": 10,
+            "nombre": "Santorini Sunset",
+            "descripcion": "Cúpulas azules, casas blancas y los atardeceres más espectaculares del Mediterráneo. Santorini es pura magia con su vino volcánico, sus aguas termales y sus vistas que han inspirado a artistas durante siglos.",
+            "imagen": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80",
+            "categoria": "Playa",
+            "precio_estimado": 1400,
+            "rating": 4.8
+        },
+        {
+            "id": 11,
+            "nombre": "Kilimanjaro Adventure",
+            "descripcion": "Conquista el techo de África en una expedición inolvidable. Atraviesa cinco ecosistemas diferentes desde la selva tropical hasta los glaciares eternos. Una prueba de fuerza, voluntad y conexión con la naturaleza.",
+            "imagen": "https://images.unsplash.com/photo-1521150932951-303a95503ed3?w=800&q=80",
+            "categoria": "Montaña",
+            "precio_estimado": 2800,
+            "rating": 4.6
+        },
+        {
+            "id": 12,
+            "nombre": "Barcelona Artística",
+            "descripcion": "Gaudí, tapas, Las Ramblas y la playa. Barcelona combina arte modernista, gastronomía mediterránea y una vida nocturna legendaria. Cada barrio cuenta una historia diferente en esta joya del Mediterráneo.",
+            "imagen": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 1300,
+            "rating": 4.7
+        }
+    ],
+    "favoritos": []
+}

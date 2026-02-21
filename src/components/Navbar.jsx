@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Plane, Menu, X, Heart } from 'lucide-react';
+import { Menu, X, Heart } from 'lucide-react';
 import { useFavorites } from '@/context/FavoritesContext';
 
 const navLinks = [
@@ -21,15 +21,17 @@ export default function Navbar() {
 
     return (
         <nav className="bg-white/90 backdrop-blur-xl border-b border-slate-200/80 sticky top-0 z-50 shadow-sm">
-            <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2.5 group shrink-0">
-                        <div className="bg-gradient-to-br from-primary-500 to-primary-700 p-2 rounded-xl shadow-md shadow-primary-500/20 group-hover:shadow-primary-500/40 transition-shadow duration-300">
-                            <Plane className="h-5 w-5 text-white" />
-                        </div>
-                        <span className="text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
-                            ViajaYa
+                        <img
+                            src="/imagenes/logo.svg"
+                            alt="PlanyRuta"
+                            className="h-10 w-auto drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <span className="text-2xl font-black tracking-tight bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
+                            PlanyRuta
                         </span>
                     </Link>
 

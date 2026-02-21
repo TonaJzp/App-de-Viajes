@@ -17,9 +17,11 @@ const categoryColors = {
     Playa: 'bg-cyan-50 text-cyan-700 border border-cyan-200',
     Montaña: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
     Ciudad: 'bg-violet-50 text-violet-700 border border-violet-200',
+    Cultural: 'bg-amber-50 text-amber-700 border border-amber-200',
+    Aventura: 'bg-rose-50 text-rose-700 border border-rose-200',
 };
 
-const categoryIcons = { Playa: '🏖️', Montaña: '🏔️', Ciudad: '🏙️' };
+const categoryIcons = { Playa: '🏖️', Montaña: '🏔️', Ciudad: '🏙️', Cultural: '🏛️', Aventura: '⛺' };
 
 export default function DetallePage() {
     const { id } = useParams();
@@ -120,8 +122,8 @@ export default function DetallePage() {
                         <button
                             onClick={() => toggleFavorito(viaje.id)}
                             className={`p-3 rounded-xl backdrop-blur-md transition-all shadow-lg hover:scale-105 ${esFav
-                                    ? 'bg-rose-500 text-white'
-                                    : 'bg-white/90 text-slate-600 hover:bg-white hover:text-rose-500'
+                                ? 'bg-rose-500 text-white'
+                                : 'bg-white/90 text-slate-600 hover:bg-white hover:text-rose-500'
                                 }`}
                         >
                             <Heart className={`h-5 w-5 ${esFav ? 'fill-white' : ''}`} />
@@ -201,8 +203,8 @@ export default function DetallePage() {
                             <button
                                 onClick={() => toggleFavorito(viaje.id)}
                                 className={`w-full py-3.5 rounded-2xl font-semibold transition-all flex items-center justify-center gap-2 mb-3 ${esFav
-                                        ? 'bg-rose-500 text-white hover:bg-rose-600 shadow-lg shadow-rose-500/25'
-                                        : 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg shadow-primary-600/25'
+                                    ? 'bg-rose-500 text-white hover:bg-rose-600 shadow-lg shadow-rose-500/25'
+                                    : 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg shadow-primary-600/25'
                                     }`}
                             >
                                 <Heart className={`h-5 w-5 ${esFav ? 'fill-white' : ''}`} />

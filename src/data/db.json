@@ -41,7 +41,7 @@
             "nombre": "Machu Picchu Trek",
             "descripcion": "Camina por el legendario sendero inca hasta la ciudadela perdida de Machu Picchu. Una aventura épica entre montañas sagradas, bosques nubosos y ruinas que guardan los secretos de una civilización milenaria.",
             "imagen": "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=800&q=80",
-            "categoria": "Montaña",
+            "categoria": "Aventura",
             "precio_estimado": 1500,
             "rating": 4.8
         },
@@ -50,7 +50,7 @@
             "nombre": "París Romántico",
             "descripcion": "La Ciudad de la Luz te espera con la Torre Eiffel, el Louvre, croissants recién hechos y paseos por el Sena. Arte, moda, gastronomía y romance se unen en cada rincón de esta ciudad icónica.",
             "imagen": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
-            "categoria": "Ciudad",
+            "categoria": "Cultural",
             "precio_estimado": 1600,
             "rating": 4.6
         },
@@ -68,7 +68,7 @@
             "nombre": "Patagonia Salvaje",
             "descripcion": "Explora los confines del mundo con glaciares milenarios, torres de granito y lagos de un azul imposible. La Patagonia argentina y chilena ofrece una naturaleza imponente y salvaje como ningún otro lugar del planeta.",
             "imagen": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
-            "categoria": "Montaña",
+            "categoria": "Aventura",
             "precio_estimado": 2000,
             "rating": 4.8
         },
@@ -95,7 +95,7 @@
             "nombre": "Kilimanjaro Adventure",
             "descripcion": "Conquista el techo de África en una expedición inolvidable. Atraviesa cinco ecosistemas diferentes desde la selva tropical hasta los glaciares eternos. Una prueba de fuerza, voluntad y conexión con la naturaleza.",
             "imagen": "https://images.unsplash.com/photo-1521150932951-303a95503ed3?w=800&q=80",
-            "categoria": "Montaña",
+            "categoria": "Aventura",
             "precio_estimado": 2800,
             "rating": 4.6
         },
@@ -104,9 +104,351 @@
             "nombre": "Barcelona Artística",
             "descripcion": "Gaudí, tapas, Las Ramblas y la playa. Barcelona combina arte modernista, gastronomía mediterránea y una vida nocturna legendaria. Cada barrio cuenta una historia diferente en esta joya del Mediterráneo.",
             "imagen": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&q=80",
-            "categoria": "Ciudad",
+            "categoria": "Cultural",
             "precio_estimado": 1300,
             "rating": 4.7
+        },
+        {
+            "id": 13,
+            "nombre": "Roma Imperial",
+            "descripcion": "Recorre el Coliseo, el Foro Romano y la Fontana di Trevi en la capital del antiguo imperio. Roma es un museo al aire libre donde cada calle esconde siglos de historia, arte y la mejor gastronomía italiana.",
+            "imagen": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80",
+            "categoria": "Cultural",
+            "precio_estimado": 1400,
+            "rating": 4.8
+        },
+        {
+            "id": 14,
+            "nombre": "Costa Rica Extrema",
+            "descripcion": "Tirolinas sobre la selva, rafting en ríos bravos y volcanes activos. Costa Rica es el paraíso de los amantes de la adrenalina con una biodiversidad que sorprende en cada rincón de sus parques nacionales.",
+            "imagen": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80",
+            "categoria": "Aventura",
+            "precio_estimado": 1350,
+            "rating": 4.7
+        },
+        {
+            "id": 15,
+            "nombre": "Dubái Futurista",
+            "descripcion": "La ciudad del futuro te espera con el Burj Khalifa, islas artificiales, centros comerciales gigantescos y experiencias de lujo incomparables. Dubái redefine lo posible en arquitectura, tecnología y entretenimiento.",
+            "imagen": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 2600,
+            "rating": 4.5
+        },
+        {
+            "id": 16,
+            "nombre": "Phuket Tropical",
+            "descripcion": "Playas de arena dorada rodeadas de acantilados de piedra caliza, templos budistas y mercados nocturnos vibrantes. Phuket combina relax tropical con una cultura tailandesa fascinante y gastronomía exquisita.",
+            "imagen": "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=800&q=80",
+            "categoria": "Playa",
+            "precio_estimado": 950,
+            "rating": 4.6
+        },
+        {
+            "id": 17,
+            "nombre": "Noruega Fjordos",
+            "descripcion": "Navega por fiordos majestuosos rodeados de montañas verdes y cascadas infinitas. Noruega ofrece paisajes de ensueño, auroras boreales y una conexión con la naturaleza nórdica que transforma el alma.",
+            "imagen": "https://images.unsplash.com/photo-1520769669658-f07657f5a307?w=800&q=80",
+            "categoria": "Montaña",
+            "precio_estimado": 2300,
+            "rating": 4.9
+        },
+        {
+            "id": 18,
+            "nombre": "Estambul Milenaria",
+            "descripcion": "Donde Oriente se encuentra con Occidente. Mezquitas imponentes, bazares laberínticos, el Bósforo al atardecer y una gastronomía que fusiona sabores de dos continentes. Estambul es historia viva en cada esquina.",
+            "imagen": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800&q=80",
+            "categoria": "Cultural",
+            "precio_estimado": 900,
+            "rating": 4.7
+        },
+        {
+            "id": 19,
+            "nombre": "Queenstown Extrema",
+            "descripcion": "La capital mundial de la aventura en Nueva Zelanda. Bungee jumping, paracaidismo, jet boat y esquí en paisajes de película. Queenstown es pura adrenalina rodeada de lagos y montañas espectaculares.",
+            "imagen": "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=800&q=80",
+            "categoria": "Aventura",
+            "precio_estimado": 2100,
+            "rating": 4.8
+        },
+        {
+            "id": 20,
+            "nombre": "Singapur Vibrante",
+            "descripcion": "Una metrópolis donde jardines futuristas conviven con barrios históricos. Marina Bay Sands, Gardens by the Bay y una escena gastronómica que rivaliza con cualquier capital del mundo. Singapur es orden y maravilla.",
+            "imagen": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 1900,
+            "rating": 4.6
+        },
+        {
+            "id": 21,
+            "nombre": "Zanzibar Exótico",
+            "descripcion": "Playas de arena blanca en la costa este de África con aguas turquesas del océano Índico. Stone Town, especias aromáticas y una cultura swahili fascinante hacen de Zanzíbar un destino único y memorable.",
+            "imagen": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80",
+            "categoria": "Playa",
+            "precio_estimado": 1000,
+            "rating": 4.5
+        },
+        {
+            "id": 22,
+            "nombre": "Monte Fuji Sagrado",
+            "descripcion": "Asciende el icónico volcán sagrado de Japón y contempla amaneceres que los poetas han cantado durante siglos. El Monte Fuji es una experiencia espiritual con vistas panorámicas de lagos y bosques ancestrales.",
+            "imagen": "https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=800&q=80",
+            "categoria": "Montaña",
+            "precio_estimado": 1700,
+            "rating": 4.7
+        },
+        {
+            "id": 23,
+            "nombre": "Atenas Clásica",
+            "descripcion": "La cuna de la civilización occidental te recibe con el Partenón, el Ágora antigua y museos que guardan las obras maestras del arte griego. Atenas combina ruinas milenarias con una vida moderna vibrante.",
+            "imagen": "https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80",
+            "categoria": "Cultural",
+            "precio_estimado": 1100,
+            "rating": 4.6
+        },
+        {
+            "id": 24,
+            "nombre": "Safari Serengeti",
+            "descripcion": "Presencia la Gran Migración en las llanuras infinitas del Serengeti. Leones, elefantes y jirafas en su hábitat natural. Un safari por Tanzania es la aventura definitiva para los amantes de la naturaleza salvaje.",
+            "imagen": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80",
+            "categoria": "Aventura",
+            "precio_estimado": 3200,
+            "rating": 4.9
+        },
+        {
+            "id": 25,
+            "nombre": "Seúl Tecnológico",
+            "descripcion": "K-pop, tecnología punta, palacios imperiales y mercados callejeros con la mejor comida asiática. Seúl fusiona tradición coreana con innovación digital en una metrópolis fascinante llena de contrastes.",
+            "imagen": "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 1500,
+            "rating": 4.5
+        },
+        {
+            "id": 26,
+            "nombre": "Islas Fiji",
+            "descripcion": "Un archipiélago de más de 300 islas con las aguas más cristalinas del Pacífico Sur. Snorkel entre arrecifes de coral, playas desiertas y una hospitalidad fiyiana que te hace sentir como en casa.",
+            "imagen": "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=800&q=80",
+            "categoria": "Playa",
+            "precio_estimado": 2800,
+            "rating": 4.7
+        },
+        {
+            "id": 27,
+            "nombre": "Dolomitas Italianas",
+            "descripcion": "Picos de roca vertical que se tiñen de rosa al atardecer, senderos alpinos de vértigo y refugios con gastronomía tirolesa. Los Dolomitas son el paraíso del senderismo y la fotografía de montaña.",
+            "imagen": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80",
+            "categoria": "Montaña",
+            "precio_estimado": 1800,
+            "rating": 4.8
+        },
+        {
+            "id": 28,
+            "nombre": "El Cairo Ancestral",
+            "descripcion": "Las Pirámides de Giza, la Esfinge y el Museo Egipcio con los tesoros de Tutankamón. El Cairo es la puerta a una de las civilizaciones más fascinantes de la historia humana, con mercados y mezquitas vibrantes.",
+            "imagen": "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800&q=80",
+            "categoria": "Cultural",
+            "precio_estimado": 800,
+            "rating": 4.5
+        },
+        {
+            "id": 29,
+            "nombre": "Gran Cañón Trekking",
+            "descripcion": "Desciende a las profundidades de uno de los fenómenos geológicos más impresionantes del planeta. El Gran Cañón ofrece rutas de senderismo épicas, rafting por el río Colorado y amaneceres que quitan el aliento.",
+            "imagen": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?w=800&q=80",
+            "categoria": "Aventura",
+            "precio_estimado": 1600,
+            "rating": 4.7
+        },
+        {
+            "id": 30,
+            "nombre": "Ámsterdam Cultural",
+            "descripcion": "Canales pintorescos, el museo Van Gogh, Rembrandt y una cultura ciclista que invita a recorrer cada rincón. Ámsterdam es creatividad, tolerancia y un encanto europeo que enamora desde el primer paseo.",
+            "imagen": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 1350,
+            "rating": 4.6
+        },
+        {
+            "id": 31,
+            "nombre": "Caribe Colombiano",
+            "descripcion": "Cartagena de Indias, playas vírgenes del Parque Tayrona e islas del Rosario con aguas turquesas. El Caribe colombiano combina historia colonial, ritmos tropicales y una gastronomía que despierta todos los sentidos.",
+            "imagen": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&q=80",
+            "categoria": "Playa",
+            "precio_estimado": 900,
+            "rating": 4.6
+        },
+        {
+            "id": 32,
+            "nombre": "Torres del Paine",
+            "descripcion": "El parque nacional más emblemático de Chile con torres de granito, glaciares azules y guanacos salvajes. Un circuito de trekking que desafía al cuerpo y recompensa con los paisajes más puros del planeta.",
+            "imagen": "https://images.unsplash.com/photo-1531804226530-70f8004aa44e?w=800&q=80",
+            "categoria": "Montaña",
+            "precio_estimado": 1900,
+            "rating": 4.8
+        },
+        {
+            "id": 33,
+            "nombre": "Kioto Imperial",
+            "descripcion": "Templos dorados, jardines zen, geishas y ceremonias del té. Kioto preserva el alma tradicional de Japón con sus miles de santuarios, bosques de bambú y una estética minimalista que inspira serenidad.",
+            "imagen": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80",
+            "categoria": "Cultural",
+            "precio_estimado": 1700,
+            "rating": 4.9
+        },
+        {
+            "id": 34,
+            "nombre": "Islandia Glacial",
+            "descripcion": "Géiseres, cascadas gigantescas, auroras boreales y cuevas de hielo azul. Islandia es otro planeta en la Tierra, con paisajes surrealistas que desafían la imaginación y actividades de aventura únicas.",
+            "imagen": "https://images.unsplash.com/photo-1504829857797-ddff29c27927?w=800&q=80",
+            "categoria": "Aventura",
+            "precio_estimado": 2400,
+            "rating": 4.8
+        },
+        {
+            "id": 35,
+            "nombre": "Hong Kong Skyline",
+            "descripcion": "Un skyline icónico, dim sum auténtico, mercados nocturnos y el teleférico sobre la bahía. Hong Kong es una fusión eléctrica de tradición china y modernidad cosmopolita que nunca deja de sorprender.",
+            "imagen": "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 1600,
+            "rating": 4.4
+        },
+        {
+            "id": 36,
+            "nombre": "Seychelles Premium",
+            "descripcion": "Rocas de granito esculpidas por el tiempo, palmeras cocoteras y aguas increíblemente cristalinas. Las Seychelles son el destino de playa más exclusivo del planeta, un refugio de biodiversidad y lujo natural.",
+            "imagen": "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&q=80",
+            "categoria": "Playa",
+            "precio_estimado": 3800,
+            "rating": 4.9
+        },
+        {
+            "id": 37,
+            "nombre": "Nepal Himalaya",
+            "descripcion": "El trekking definitivo al campo base del Everest pasando por monasterios budistas, puentes colgantes y aldeas sherpa. Nepal es la meca del montañismo con paisajes que definen la majestuosidad.",
+            "imagen": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80",
+            "categoria": "Montaña",
+            "precio_estimado": 2200,
+            "rating": 4.8
+        },
+        {
+            "id": 38,
+            "nombre": "Petra Perdida",
+            "descripcion": "La ciudad rosa excavada en la roca por los nabateos hace más de 2000 años. Petra es una de las Siete Maravillas del Mundo Moderno, un tesoro arqueológico que deja sin aliento a todo visitante.",
+            "imagen": "https://images.unsplash.com/photo-1580834341580-8c17a3a630ca?w=800&q=80",
+            "categoria": "Cultural",
+            "precio_estimado": 1200,
+            "rating": 4.7
+        },
+        {
+            "id": 39,
+            "nombre": "Amazonas Salvaje",
+            "descripcion": "Adéntrate en el pulmón verde del planeta. Navegación por ríos serpenteantes, avistamiento de jaguares, delfines rosados y una selva que alberga la mayor biodiversidad del mundo. Una aventura raw e inolvidable.",
+            "imagen": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&q=80",
+            "categoria": "Aventura",
+            "precio_estimado": 1800,
+            "rating": 4.6
+        },
+        {
+            "id": 40,
+            "nombre": "Praga Bohemia",
+            "descripcion": "Puentes medievales, un reloj astronómico centenario, cerveza artesanal y arquitectura gótica de ensueño. Praga es la joya de Europa Central, con una atmósfera bohemia que encanta a cada paso.",
+            "imagen": "https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 800,
+            "rating": 4.6
+        },
+        {
+            "id": 41,
+            "nombre": "Tulum Bohemio",
+            "descripcion": "Ruinas mayas frente al mar turquesa, cenotes sagrados y una vibra bohemia que atrae viajeros de todo el mundo. Tulum combina arqueología, playas paradisíacas y una escena gastronómica emergente.",
+            "imagen": "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=800&q=80",
+            "categoria": "Playa",
+            "precio_estimado": 1100,
+            "rating": 4.5
+        },
+        {
+            "id": 42,
+            "nombre": "Mont Blanc Alpino",
+            "descripcion": "El techo de Europa Occidental con rutas de alta montaña que cruzan Francia, Italia y Suiza. El Tour du Mont Blanc es el trekking de varios días más célebre del mundo con refugios acogedores y vistas infinitas.",
+            "imagen": "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=800&q=80",
+            "categoria": "Montaña",
+            "precio_estimado": 2000,
+            "rating": 4.7
+        },
+        {
+            "id": 43,
+            "nombre": "Angkor Wat Místico",
+            "descripcion": "El complejo de templos más grande del mundo emerge entre la selva camboyana al amanecer. Angkor Wat es una obra maestra del arte jemer, un lugar místico que transporta al visitante a otra era.",
+            "imagen": "https://images.unsplash.com/photo-1599283787923-51b965a58b05?w=800&q=80",
+            "categoria": "Cultural",
+            "precio_estimado": 700,
+            "rating": 4.8
+        },
+        {
+            "id": 44,
+            "nombre": "Galápagos Wildlife",
+            "descripcion": "Nada junto a tortugas gigantes, iguanas marinas y leones marinos en las islas que inspiraron la teoría de la evolución. Las Galápagos son un laboratorio natural donde la vida salvaje no teme al ser humano.",
+            "imagen": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
+            "categoria": "Aventura",
+            "precio_estimado": 3500,
+            "rating": 4.9
+        },
+        {
+            "id": 45,
+            "nombre": "Lisboa Atlántica",
+            "descripcion": "Tranvías amarillos subiendo colinas empedradas, pastéis de nata, fado melancólico y miradores sobre el Tajo. Lisboa es una ciudad que conquista con su luz dorada, su nostalgia y su modernidad creativa.",
+            "imagen": "https://images.unsplash.com/photo-1585208798174-6cedd86e019a?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 1000,
+            "rating": 4.7
+        },
+        {
+            "id": 46,
+            "nombre": "Bahamas Cristalinas",
+            "descripcion": "Cerdos nadadores, bancos de arena en medio del océano y aguas tan claras que parecen irreales. Las Bahamas son 700 islas de postal que ofrecen snorkel, buceo y el relax más puro del Atlántico.",
+            "imagen": "https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80",
+            "categoria": "Playa",
+            "precio_estimado": 2400,
+            "rating": 4.6
+        },
+        {
+            "id": 47,
+            "nombre": "Cáucaso Georgiano",
+            "descripcion": "Montañas salvajes del Cáucaso con iglesias medievales en cumbres remotas, valles cubiertos de flores y una hospitalidad georgiana legendaria. Un destino de trekking auténtico aún por descubrir.",
+            "imagen": "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=800&q=80",
+            "categoria": "Montaña",
+            "precio_estimado": 750,
+            "rating": 4.5
+        },
+        {
+            "id": 48,
+            "nombre": "Marrakech Sensorial",
+            "descripcion": "Zocos laberínticos, la plaza Jemaa el-Fna, riads con patios de azulejos y los aromas de las especias. Marrakech es un asalto a los sentidos que revela la riqueza cultural del norte de África.",
+            "imagen": "https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=800&q=80",
+            "categoria": "Cultural",
+            "precio_estimado": 650,
+            "rating": 4.5
+        },
+        {
+            "id": 49,
+            "nombre": "Paracaidismo Dubái",
+            "descripcion": "Salta desde 4000 metros sobre la palmera artificial más famosa del mundo. El paracaidismo en Dubái ofrece vistas únicas del skyline futurista y el desierto dorado con la adrenalina más pura posible.",
+            "imagen": "https://images.unsplash.com/photo-1630879937467-4afa290b1a6b?w=800&q=80",
+            "categoria": "Aventura",
+            "precio_estimado": 500,
+            "rating": 4.4
+        },
+        {
+            "id": 50,
+            "nombre": "Buenos Aires Tanguero",
+            "descripcion": "La capital del tango, los steaks más jugosos y barrios con personalidad propia como La Boca y San Telmo. Buenos Aires es pasión porteña, cafés literarios y una vida cultural que no descansa nunca.",
+            "imagen": "https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=800&q=80",
+            "categoria": "Ciudad",
+            "precio_estimado": 1100,
+            "rating": 4.6
         }
     ],
     "favoritos": []

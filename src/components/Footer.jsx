@@ -1,18 +1,20 @@
-import { Plane, Github, Heart } from 'lucide-react';
+import { Github, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
     return (
         <footer className="bg-slate-900 text-slate-400 mt-auto">
-            <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 py-14">
+            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-14">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                     {/* Brand */}
                     <div>
-                        <div className="flex items-center gap-2.5 mb-4">
-                            <div className="bg-gradient-to-br from-primary-500 to-primary-700 p-2 rounded-xl">
-                                <Plane className="h-5 w-5 text-white" />
-                            </div>
-                            <span className="text-xl font-bold text-white">ViajaYa</span>
+                        <div className="flex items-center gap-3 mb-4">
+                            <img
+                                src="/imagenes/logo.svg"
+                                alt="PlanyRuta"
+                                className="h-10 w-auto"
+                            />
+                            <span className="text-2xl font-black text-white tracking-tight">PlanyRuta</span>
                         </div>
                         <p className="text-sm leading-relaxed text-slate-400">
                             Tu compañero de viajes. Explora destinos increíbles, crea
@@ -61,13 +63,23 @@ export default function Footer() {
                                     🏙️ Ciudad
                                 </Link>
                             </li>
+                            <li>
+                                <Link to="/explorar?categoria=Cultural" className="hover:text-white transition-colors">
+                                    🏛️ Cultural
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/explorar?categoria=Aventura" className="hover:text-white transition-colors">
+                                    ⛺ Aventura
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
                 <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p className="text-xs text-slate-500">
-                        © 2026 ViajaYa. Hecho con{' '}
+                        © 2026 PlanyRuta. Hecho con{' '}
                         <Heart className="inline h-3 w-3 text-rose-500 fill-rose-500" /> para
                         amantes de los viajes.
                     </p>

@@ -29,7 +29,7 @@ export default function FavoritosPage() {
         <div className="min-h-screen bg-slate-50">
             {/* Header */}
             <div className="bg-gradient-to-br from-rose-500 to-rose-700 text-white">
-                <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 pt-12 pb-20">
+                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-12 pb-20">
                     <div className="flex items-center gap-3 mb-4">
                         <div className="bg-white/20 backdrop-blur-sm p-2.5 rounded-xl">
                             <Heart className="h-6 w-6 fill-white" />
@@ -43,7 +43,7 @@ export default function FavoritosPage() {
             </div>
 
             {/* Content */}
-            <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 -mt-8 pb-20">
+            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 -mt-8 pb-20">
 
                 {/* Loading */}
                 {loading && !error && (

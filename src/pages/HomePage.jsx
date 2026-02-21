@@ -22,14 +22,28 @@ export default function HomePage() {
     return (
         <div>
             {/* ─── Hero Section ─── */}
-            <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 text-white">
+            <section className="relative overflow-hidden text-white flex flex-col justify-center min-h-[90vh] sm:min-h-[85vh]">
+                {/* Background Video */}
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover z-0"
+                >
+                    <source src="/videos/Enigma_Clip_22s.mp4.webm" type="video/webm" />
+                </video>
+
+                {/* Dark Overlay for readability */}
+                <div className="absolute inset-0 bg-black/50 z-0"></div>
+
                 {/* Decorative blurred orbs */}
-                <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-                    <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary-400/20 rounded-full blur-3xl" />
-                    <div className="absolute bottom-0 -left-32 w-[28rem] h-[28rem] bg-accent-500/15 rounded-full blur-3xl" />
+                <div className="absolute inset-0 pointer-events-none z-0 mix-blend-overlay" aria-hidden="true">
+                    <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary-400/30 rounded-full blur-3xl" />
+                    <div className="absolute bottom-0 -left-32 w-[28rem] h-[28rem] bg-accent-500/30 rounded-full blur-3xl" />
                 </div>
 
-                <div className="relative max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 pt-20 pb-32 sm:pt-28 sm:pb-40 lg:pt-36 lg:pb-48">
+                <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-20 pb-32 sm:pt-28 sm:pb-40 lg:pt-36 lg:pb-48">
                     <div className="max-w-2xl">
                         {/* Pill badge */}
                         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-8 border border-white/20">
@@ -73,7 +87,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Smooth wave divider */}
-                <div className="absolute bottom-0 left-0 right-0 leading-[0]">
+                <div className="absolute bottom-0 left-0 right-0 leading-[0] z-10 drop-shadow-lg">
                     <svg
                         className="block w-full"
                         viewBox="0 0 1440 120"
@@ -91,11 +105,11 @@ export default function HomePage() {
             </section>
 
             {/* ─── Stats ─── */}
-            <section className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 -mt-8 sm:-mt-12">
+            <section className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 -mt-8 sm:-mt-12">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                     {[
-                        { icon: MapPinned, value: '12+', label: 'Destinos Únicos' },
-                        { icon: Compass, value: '3', label: 'Categorías' },
+                        { icon: MapPinned, value: '50+', label: 'Destinos Únicos' },
+                        { icon: Compass, value: '5', label: 'Categorías' },
                         { icon: PlaneTakeoff, value: '∞', label: 'Aventuras' },
                     ].map((stat, i) => (
                         <div
@@ -115,7 +129,7 @@ export default function HomePage() {
             </section>
 
             {/* ─── Featured Destinations ─── */}
-            <section className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 pt-20 pb-16">
+            <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-20 pb-16">
                 <div className="flex items-end justify-between mb-10">
                     <div>
                         <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
@@ -152,7 +166,7 @@ export default function HomePage() {
             </section>
 
             {/* ─── CTA Section ─── */}
-            <section className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 pb-20">
+            <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pb-20">
                 <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-10 sm:p-16 overflow-hidden">
                     {/* Decorative */}
                     <div className="absolute top-0 right-0 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl pointer-events-none" />

@@ -7,12 +7,16 @@ const categoryColors = {
     Playa: 'bg-cyan-50 text-cyan-700 border border-cyan-200',
     Montaña: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
     Ciudad: 'bg-violet-50 text-violet-700 border border-violet-200',
+    Cultural: 'bg-amber-50 text-amber-700 border border-amber-200',
+    Aventura: 'bg-rose-50 text-rose-700 border border-rose-200',
 };
 
 const categoryIcons = {
     Playa: '🏖️',
     Montaña: '🏔️',
     Ciudad: '🏙️',
+    Cultural: '🏛️',
+    Aventura: '⛺',
 };
 
 export default function TripCard({ viaje }) {
@@ -29,8 +33,8 @@ export default function TripCard({ viaje }) {
         >
             <article
                 className={`bg-white rounded-2xl overflow-hidden border transition-all duration-300 ${isHovered
-                        ? 'shadow-xl shadow-primary-500/10 -translate-y-1.5 border-primary-200'
-                        : 'shadow-sm border-slate-200/80'
+                    ? 'shadow-xl shadow-primary-500/10 -translate-y-1.5 border-primary-200'
+                    : 'shadow-sm border-slate-200/80'
                     }`}
             >
                 {/* Image container */}
@@ -61,8 +65,8 @@ export default function TripCard({ viaje }) {
                             toggleFavorito(viaje.id);
                         }}
                         className={`absolute top-4 right-4 p-2.5 rounded-full backdrop-blur-md transition-all duration-200 hover:scale-110 ${esFav
-                                ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/40'
-                                : 'bg-white/70 text-slate-500 hover:bg-white hover:text-rose-500'
+                            ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/40'
+                            : 'bg-white/70 text-slate-500 hover:bg-white hover:text-rose-500'
                             }`}
                         aria-label={esFav ? 'Quitar de favoritos' : 'Añadir a favoritos'}
                     >
@@ -97,8 +101,8 @@ export default function TripCard({ viaje }) {
 
                     <div
                         className={`flex items-center gap-1.5 text-xs font-semibold transition-all duration-300 ${isHovered
-                                ? 'text-primary-600 translate-x-1'
-                                : 'text-slate-400'
+                            ? 'text-primary-600 translate-x-1'
+                            : 'text-slate-400'
                             }`}
                     >
                         <MapPin className="h-3.5 w-3.5" />

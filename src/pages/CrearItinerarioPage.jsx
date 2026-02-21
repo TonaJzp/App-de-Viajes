@@ -72,7 +72,7 @@ export default function CrearItinerarioPage() {
         <div className="min-h-screen bg-slate-50">
             {/* Header */}
             <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-                <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 pt-12 pb-20">
+                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-12 pb-20">
                     <div className="flex items-center gap-3 mb-4">
                         <div className="bg-accent-500/20 backdrop-blur-sm p-2.5 rounded-xl">
                             <PlaneTakeoff className="h-6 w-6 text-accent-400" />
@@ -235,8 +235,8 @@ export default function CrearItinerarioPage() {
                         type="submit"
                         disabled={loading}
                         className={`mt-8 w-full py-4 rounded-2xl font-semibold text-white transition-all flex items-center justify-center gap-2 ${loading
-                                ? 'bg-primary-400 cursor-not-allowed'
-                                : 'bg-primary-600 hover:bg-primary-700 shadow-lg shadow-primary-600/25 hover:shadow-xl hover:-translate-y-0.5'
+                            ? 'bg-primary-400 cursor-not-allowed'
+                            : 'bg-primary-600 hover:bg-primary-700 shadow-lg shadow-primary-600/25 hover:shadow-xl hover:-translate-y-0.5'
                             }`}
                     >
                         {loading ? (

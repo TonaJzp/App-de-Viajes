@@ -1,4 +1,4 @@
-const categories = [
+const categorias = [
     { value: 'Todos', label: 'Todos', icon: '🌍' },
     { value: 'Playa', label: 'Playa', icon: '🏖️' },
     { value: 'Montaña', label: 'Montaña', icon: '🏔️' },
@@ -7,14 +7,14 @@ const categories = [
     { value: 'Aventura', label: 'Aventura', icon: '⛺' },
 ];
 
-export default function CategoryFilter({ selected, onSelect }) {
+export default function FiltroCategorias({ seleccionada, alSeleccionar }) {
     return (
-        <div className="flex flex-nowrap gap-2">
-            {categories.map((cat) => (
+        <div className="flex flex-wrap sm:flex-nowrap gap-2">
+            {categorias.map((cat) => (
                 <button
                     key={cat.value}
-                    onClick={() => onSelect(cat.value)}
-                    className={`inline-flex items-center whitespace-nowrap px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${selected === cat.value
+                    onClick={() => alSeleccionar(cat.value)}
+                    className={`inline-flex items-center whitespace-nowrap px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${seleccionada === cat.value
                         ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/25'
                         : 'bg-white text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-600'
                         }`}

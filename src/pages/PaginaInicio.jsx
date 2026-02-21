@@ -2,28 +2,28 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Compass, MapPinned, PlaneTakeoff, Sparkles } from 'lucide-react';
 import { getViajes } from '@/services/api';
-import TripCard from '@/components/TripCard';
-import SkeletonCard from '@/components/SkeletonCard';
+import TarjetaViaje from '@/components/TarjetaViaje';
+import TarjetaEsqueleto from '@/components/TarjetaEsqueleto';
 
-export default function HomePage() {
-    const [featuredTrips, setFeaturedTrips] = useState([]);
-    const [loading, setLoading] = useState(true);
+export default function PaginaInicio() {
+    const [viajesDestacados, setViajesDestacados] = useState([]);
+    const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
         getViajes()
-            .then((data) => {
-                const sorted = [...data].sort((a, b) => b.rating - a.rating).slice(0, 3);
-                setFeaturedTrips(sorted);
+            .then((datos) => {
+                const ordenados = [...datos].sort((a, b) => b.rating - a.rating).slice(0, 3);
+                setViajesDestacados(ordenados);
             })
             .catch(console.error)
-            .finally(() => setLoading(false));
+            .finally(() => setCargando(false));
     }, []);
 
     return (
         <div>
-            {/* ─── Hero Section ─── */}
+            {/* ─── Sección Hero ─── */}
             <section className="relative overflow-hidden text-white flex flex-col justify-center min-h-[90vh] sm:min-h-[85vh]">
-                {/* Background Video */}
+                {/* Vídeo de fondo */}
                 <video
                     autoPlay
                     loop
@@ -34,18 +34,18 @@ export default function HomePage() {
                     <source src="/videos/Enigma_Clip_22s.mp4.webm" type="video/webm" />
                 </video>
 
-                {/* Dark Overlay for readability */}
+                {/* Overlay oscuro */}
                 <div className="absolute inset-0 bg-black/50 z-0"></div>
 
-                {/* Decorative blurred orbs */}
+                {/* Orbes decorativos */}
                 <div className="absolute inset-0 pointer-events-none z-0 mix-blend-overlay" aria-hidden="true">
                     <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary-400/30 rounded-full blur-3xl" />
                     <div className="absolute bottom-0 -left-32 w-[28rem] h-[28rem] bg-accent-500/30 rounded-full blur-3xl" />
                 </div>
 
-                <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-20 pb-32 sm:pt-28 sm:pb-40 lg:pt-36 lg:pb-48">
+                <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-20 pb-32 sm:pt-28¡ sm:pb-40 lg:pt-22 lg:pb-48">
                     <div className="max-w-2xl">
-                        {/* Pill badge */}
+                        {/* Badge */}
                         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-8 border border-white/20">
                             <Sparkles className="h-4 w-4 text-accent-400" />
                             <span className="text-sm font-medium text-white/90">
@@ -53,7 +53,7 @@ export default function HomePage() {
                             </span>
                         </div>
 
-                        {/* Heading */}
+                        {/* Título */}
                         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.08] tracking-tight">
                             Planifica viajes{' '}
                             <span className="bg-gradient-to-r from-accent-400 to-amber-300 bg-clip-text text-transparent">
@@ -66,7 +66,7 @@ export default function HomePage() {
                             y guarda tus lugares favoritos en un solo lugar.
                         </p>
 
-                        {/* CTA buttons */}
+                        {/* Botones CTA */}
                         <div className="mt-10 flex flex-col sm:flex-row gap-4">
                             <Link
                                 to="/explorar"
@@ -86,7 +86,7 @@ export default function HomePage() {
                     </div>
                 </div>
 
-                {/* Smooth wave divider */}
+                {/* Divisor ondulado */}
                 <div className="absolute bottom-0 left-0 right-0 leading-[0] z-10 drop-shadow-lg">
                     <svg
                         className="block w-full"
@@ -104,31 +104,31 @@ export default function HomePage() {
                 </div>
             </section>
 
-            {/* ─── Stats ─── */}
-            <section className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 -mt-8 sm:-mt-12">
+            {/* ─── Estadísticas ─── */}
+            <section className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 -mt-16 sm:-mt-20">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                     {[
                         { icon: MapPinned, value: '50+', label: 'Destinos Únicos' },
                         { icon: Compass, value: '5', label: 'Categorías' },
                         { icon: PlaneTakeoff, value: '∞', label: 'Aventuras' },
-                    ].map((stat, i) => (
+                    ].map((dato, i) => (
                         <div
                             key={i}
                             className="bg-white rounded-2xl p-6 shadow-md border border-slate-100/80 flex items-center gap-4 hover:shadow-lg transition-shadow duration-300"
                         >
                             <div className="bg-primary-50 p-3.5 rounded-xl shrink-0">
-                                <stat.icon className="h-6 w-6 text-primary-600" />
+                                <dato.icon className="h-6 w-6 text-primary-600" />
                             </div>
                             <div>
-                                <div className="text-2xl font-bold text-slate-900">{stat.value}</div>
-                                <div className="text-sm text-slate-500">{stat.label}</div>
+                                <div className="text-2xl font-bold text-slate-900">{dato.value}</div>
+                                <div className="text-sm text-slate-500">{dato.label}</div>
                             </div>
                         </div>
                     ))}
                 </div>
             </section>
 
-            {/* ─── Featured Destinations ─── */}
+            {/* ─── Destinos Destacados ─── */}
             <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-20 pb-16">
                 <div className="flex items-end justify-between mb-10">
                     <div>
@@ -148,10 +148,10 @@ export default function HomePage() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                    {loading
-                        ? Array.from({ length: 3 }).map((_, i) => <SkeletonCard key={i} />)
-                        : featuredTrips.map((viaje) => (
-                            <TripCard key={viaje.id} viaje={viaje} />
+                    {cargando
+                        ? Array.from({ length: 3 }).map((_, i) => <TarjetaEsqueleto key={i} />)
+                        : viajesDestacados.map((viaje) => (
+                            <TarjetaViaje key={viaje.id} viaje={viaje} />
                         ))}
                 </div>
 
@@ -165,10 +165,10 @@ export default function HomePage() {
                 </div>
             </section>
 
-            {/* ─── CTA Section ─── */}
+            {/* ─── Sección CTA ─── */}
             <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pb-20">
                 <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-10 sm:p-16 overflow-hidden">
-                    {/* Decorative */}
+                    {/* Decorativo */}
                     <div className="absolute top-0 right-0 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl pointer-events-none" />
                     <div className="absolute bottom-0 left-0 w-56 h-56 bg-accent-500/10 rounded-full blur-3xl pointer-events-none" />
 

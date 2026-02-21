@@ -1,6 +1,6 @@
 import { Search, X } from 'lucide-react';
 
-export default function SearchBar({ value, onChange, placeholder = 'Buscar destinos...' }) {
+export default function BarraBusqueda({ value, onChange, placeholder = 'Buscar destinos...' }) {
     return (
         <div className="relative w-full max-w-md">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />

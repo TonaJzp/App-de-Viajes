@@ -1,73 +1,73 @@
 import { useState, useEffect } from 'react';
 import { Compass, AlertTriangle, SearchX, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getViajes } from '@/services/api';
-import TripCard from '@/components/TripCard';
-import SearchBar from '@/components/SearchBar';
-import CategoryFilter from '@/components/CategoryFilter';
-import SkeletonCard from '@/components/SkeletonCard';
+import TarjetaViaje from '@/components/TarjetaViaje';
+import BarraBusqueda from '@/components/BarraBusqueda';
+import FiltroCategorias from '@/components/FiltroCategorias';
+import TarjetaEsqueleto from '@/components/TarjetaEsqueleto';
 
-const ITEMS_PER_PAGE = 12;
+const ITEMS_POR_PAGINA = 12;
 
-export default function ExplorarPage() {
+export default function PaginaExplorar() {
     const [viajes, setViajes] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('Todos');
-    const [currentPage, setCurrentPage] = useState(1);
+    const [terminoBusqueda, setTerminoBusqueda] = useState('');
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todos');
+    const [paginaActual, setPaginaActual] = useState(1);
 
     useEffect(() => {
-        setLoading(true);
+        setCargando(true);
         setError(null);
         getViajes()
-            .then((data) => setViajes(data))
+            .then((datos) => setViajes(datos))
             .catch((err) => setError(err.message))
-            .finally(() => setLoading(false));
+            .finally(() => setCargando(false));
     }, []);
 
-    // Reset page when filters change
+    // Reiniciar página al cambiar filtros
     useEffect(() => {
-        setCurrentPage(1);
-    }, [searchTerm, selectedCategory]);
+        setPaginaActual(1);
+    }, [terminoBusqueda, categoriaSeleccionada]);
 
-    const filteredViajes = viajes.filter((viaje) => {
-        const matchesSearch = viaje.nombre
+    const viajesFiltrados = viajes.filter((viaje) => {
+        const coincideBusqueda = viaje.nombre
             .toLowerCase()
-            .includes(searchTerm.toLowerCase());
-        const matchesCategory =
-            selectedCategory === 'Todos' || viaje.categoria === selectedCategory;
-        return matchesSearch && matchesCategory;
+            .includes(terminoBusqueda.toLowerCase());
+        const coincideCategoria =
+            categoriaSeleccionada === 'Todos' || viaje.categoria === categoriaSeleccionada;
+        return coincideBusqueda && coincideCategoria;
     });
 
-    const totalPages = Math.ceil(filteredViajes.length / ITEMS_PER_PAGE);
-    const paginatedViajes = filteredViajes.slice(
-        (currentPage - 1) * ITEMS_PER_PAGE,
-        currentPage * ITEMS_PER_PAGE
+    const totalPaginas = Math.ceil(viajesFiltrados.length / ITEMS_POR_PAGINA);
+    const viajesPaginados = viajesFiltrados.slice(
+        (paginaActual - 1) * ITEMS_POR_PAGINA,
+        paginaActual * ITEMS_POR_PAGINA
     );
 
-    const goToPage = (page) => {
-        setCurrentPage(page);
+    const irAPagina = (pagina) => {
+        setPaginaActual(pagina);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // Generate page numbers to display
-    const getPageNumbers = () => {
-        const pages = [];
-        const maxVisible = 5;
-        let start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-        let end = Math.min(totalPages, start + maxVisible - 1);
-        if (end - start + 1 < maxVisible) {
-            start = Math.max(1, end - maxVisible + 1);
+    // Generar números de página visibles
+    const obtenerNumerosPagina = () => {
+        const paginas = [];
+        const maxVisibles = 5;
+        let inicio = Math.max(1, paginaActual - Math.floor(maxVisibles / 2));
+        let fin = Math.min(totalPaginas, inicio + maxVisibles - 1);
+        if (fin - inicio + 1 < maxVisibles) {
+            inicio = Math.max(1, fin - maxVisibles + 1);
         }
-        for (let i = start; i <= end; i++) {
-            pages.push(i);
+        for (let i = inicio; i <= fin; i++) {
+            paginas.push(i);
         }
-        return pages;
+        return paginas;
     };
 
     return (
         <div className="min-h-screen bg-slate-50">
-            {/* Page header */}
+            {/* Cabecera */}
             <div className="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-12 pb-20">
                     <div className="flex items-center gap-3 mb-4">
@@ -83,20 +83,20 @@ export default function ExplorarPage() {
                 </div>
             </div>
 
-            {/* Filters — floating card */}
+            {/* Filtros — tarjeta flotante */}
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 -mt-8">
                 <div className="bg-white rounded-2xl shadow-lg border border-slate-200/60 p-5 sm:p-6">
                     <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-                        <SearchBar value={searchTerm} onChange={setSearchTerm} />
-                        <CategoryFilter
-                            selected={selectedCategory}
-                            onSelect={setSelectedCategory}
+                        <BarraBusqueda value={terminoBusqueda} onChange={setTerminoBusqueda} />
+                        <FiltroCategorias
+                            seleccionada={categoriaSeleccionada}
+                            alSeleccionar={setCategoriaSeleccionada}
                         />
                     </div>
                 </div>
             </div>
 
-            {/* Results grid */}
+            {/* Cuadrícula de resultados */}
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-10 sm:py-12">
                 {/* Error */}
                 {error && (
@@ -117,110 +117,110 @@ export default function ExplorarPage() {
                     </div>
                 )}
 
-                {/* Loading skeletons */}
-                {loading && !error && (
+                {/* Esqueletos de carga */}
+                {cargando && !error && (
                     <div>
                         <div className="flex items-center justify-between mb-8">
                             <div className="h-5 w-44 bg-slate-200 rounded-lg animate-pulse" />
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
                             {Array.from({ length: 6 }).map((_, i) => (
-                                <SkeletonCard key={i} />
+                                <TarjetaEsqueleto key={i} />
                             ))}
                         </div>
                     </div>
                 )}
 
-                {/* Results */}
-                {!loading && !error && (
+                {/* Resultados */}
+                {!cargando && !error && (
                     <>
                         <div className="flex items-center justify-between mb-8">
                             <p className="text-sm text-slate-500">
                                 <span className="font-bold text-slate-800">
-                                    {filteredViajes.length}
+                                    {viajesFiltrados.length}
                                 </span>{' '}
-                                {filteredViajes.length === 1 ? 'destino encontrado' : 'destinos encontrados'}
-                                {totalPages > 1 && (
+                                {viajesFiltrados.length === 1 ? 'destino encontrado' : 'destinos encontrados'}
+                                {totalPaginas > 1 && (
                                     <span className="text-slate-400">
-                                        {' '}· Página {currentPage} de {totalPages}
+                                        {' '}· Página {paginaActual} de {totalPaginas}
                                     </span>
                                 )}
                             </p>
                         </div>
 
-                        {paginatedViajes.length > 0 ? (
+                        {viajesPaginados.length > 0 ? (
                             <>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                                    {paginatedViajes.map((viaje) => (
-                                        <TripCard key={viaje.id} viaje={viaje} />
+                                    {viajesPaginados.map((viaje) => (
+                                        <TarjetaViaje key={viaje.id} viaje={viaje} />
                                     ))}
                                 </div>
 
-                                {/* Pagination */}
-                                {totalPages > 1 && (
-                                    <div className="flex items-center justify-center gap-2 mt-12">
+                                {/* Paginación */}
+                                {totalPaginas > 1 && (
+                                    <div className="flex items-center justify-center gap-1 sm:gap-2 mt-12 flex-wrap">
                                         <button
-                                            onClick={() => goToPage(currentPage - 1)}
-                                            disabled={currentPage === 1}
-                                            className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${currentPage === 1
+                                            onClick={() => irAPagina(paginaActual - 1)}
+                                            disabled={paginaActual === 1}
+                                            className={`flex items-center gap-1 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${paginaActual === 1
                                                 ? 'bg-slate-100 text-slate-300 cursor-not-allowed'
                                                 : 'bg-white text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-600 shadow-sm hover:shadow'
                                                 }`}
                                         >
                                             <ChevronLeft className="h-4 w-4" />
-                                            Anterior
+                                            <span className="hidden sm:inline">Anterior</span>
                                         </button>
 
-                                        <div className="flex items-center gap-1.5">
-                                            {getPageNumbers()[0] > 1 && (
+                                        <div className="flex items-center gap-1 sm:gap-1.5">
+                                            {obtenerNumerosPagina()[0] > 1 && (
                                                 <>
                                                     <button
-                                                        onClick={() => goToPage(1)}
-                                                        className="w-10 h-10 rounded-xl text-sm font-medium bg-white text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-600 transition-all shadow-sm"
+                                                        onClick={() => irAPagina(1)}
+                                                        className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl text-sm font-medium bg-white text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-600 transition-all shadow-sm"
                                                     >
                                                         1
                                                     </button>
-                                                    {getPageNumbers()[0] > 2 && (
-                                                        <span className="text-slate-400 px-1">…</span>
+                                                    {obtenerNumerosPagina()[0] > 2 && (
+                                                        <span className="text-slate-400 px-0.5 sm:px-1">…</span>
                                                     )}
                                                 </>
                                             )}
-                                            {getPageNumbers().map((page) => (
+                                            {obtenerNumerosPagina().map((pagina) => (
                                                 <button
-                                                    key={page}
-                                                    onClick={() => goToPage(page)}
-                                                    className={`w-10 h-10 rounded-xl text-sm font-medium transition-all duration-200 ${currentPage === page
+                                                    key={pagina}
+                                                    onClick={() => irAPagina(pagina)}
+                                                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl text-sm font-medium transition-all duration-200 ${paginaActual === pagina
                                                         ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/25'
                                                         : 'bg-white text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-600 shadow-sm'
                                                         }`}
                                                 >
-                                                    {page}
+                                                    {pagina}
                                                 </button>
                                             ))}
-                                            {getPageNumbers()[getPageNumbers().length - 1] < totalPages && (
+                                            {obtenerNumerosPagina()[obtenerNumerosPagina().length - 1] < totalPaginas && (
                                                 <>
-                                                    {getPageNumbers()[getPageNumbers().length - 1] < totalPages - 1 && (
-                                                        <span className="text-slate-400 px-1">…</span>
+                                                    {obtenerNumerosPagina()[obtenerNumerosPagina().length - 1] < totalPaginas - 1 && (
+                                                        <span className="text-slate-400 px-0.5 sm:px-1">…</span>
                                                     )}
                                                     <button
-                                                        onClick={() => goToPage(totalPages)}
-                                                        className="w-10 h-10 rounded-xl text-sm font-medium bg-white text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-600 transition-all shadow-sm"
+                                                        onClick={() => irAPagina(totalPaginas)}
+                                                        className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl text-sm font-medium bg-white text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-600 transition-all shadow-sm"
                                                     >
-                                                        {totalPages}
+                                                        {totalPaginas}
                                                     </button>
                                                 </>
                                             )}
                                         </div>
 
                                         <button
-                                            onClick={() => goToPage(currentPage + 1)}
-                                            disabled={currentPage === totalPages}
-                                            className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${currentPage === totalPages
+                                            onClick={() => irAPagina(paginaActual + 1)}
+                                            disabled={paginaActual === totalPaginas}
+                                            className={`flex items-center gap-1 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${paginaActual === totalPaginas
                                                 ? 'bg-slate-100 text-slate-300 cursor-not-allowed'
                                                 : 'bg-white text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-600 shadow-sm hover:shadow'
                                                 }`}
                                         >
-                                            Siguiente
+                                            <span className="hidden sm:inline">Siguiente</span>
                                             <ChevronRight className="h-4 w-4" />
                                         </button>
                                     </div>
@@ -240,8 +240,8 @@ export default function ExplorarPage() {
                                 </p>
                                 <button
                                     onClick={() => {
-                                        setSearchTerm('');
-                                        setSelectedCategory('Todos');
+                                        setTerminoBusqueda('');
+                                        setCategoriaSeleccionada('Todos');
                                     }}
                                     className="mt-6 text-primary-600 font-semibold hover:text-primary-700 transition-colors"
                                 >
@@ -255,4 +255,3 @@ export default function ExplorarPage() {
         </div>
     );
 }
-

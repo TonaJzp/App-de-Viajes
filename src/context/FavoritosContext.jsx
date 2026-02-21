@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 
-const FavoritesContext = createContext();
+const FavoritosContext = createContext();
 
-export function FavoritesProvider({ children }) {
+export function FavoritosProvider({ children }) {
     const [favoritos, setFavoritos] = useState([]);
 
     const toggleFavorito = useCallback((id) => {
@@ -11,7 +11,7 @@ export function FavoritesProvider({ children }) {
         );
     }, []);
 
-    const isFavorito = useCallback(
+    const esFavorito = useCallback(
         (id) => favoritos.includes(id),
         [favoritos]
     );
@@ -19,18 +19,18 @@ export function FavoritesProvider({ children }) {
     const totalFavoritos = favoritos.length;
 
     return (
-        <FavoritesContext.Provider
-            value={{ favoritos, toggleFavorito, isFavorito, totalFavoritos }}
+        <FavoritosContext.Provider
+            value={{ favoritos, toggleFavorito, esFavorito, totalFavoritos }}
         >
             {children}
-        </FavoritesContext.Provider>
+        </FavoritosContext.Provider>
     );
 }
 
-export function useFavorites() {
-    const context = useContext(FavoritesContext);
+export function useFavoritos() {
+    const context = useContext(FavoritosContext);
     if (!context) {
-        throw new Error('useFavorites debe usarse dentro de un FavoritesProvider');
+        throw new Error('useFavoritos debe usarse dentro de un FavoritosProvider');
     }
     return context;
 }

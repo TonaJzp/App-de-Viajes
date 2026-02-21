@@ -10,10 +10,10 @@ import {
     AlertTriangle,
 } from 'lucide-react';
 import { getViajeById } from '@/services/api';
-import { useFavorites } from '@/context/FavoritesContext';
+import { useFavoritos } from '@/context/FavoritosContext';
 import Modal from '@/components/Modal';
 
-const categoryColors = {
+const coloresCategorias = {
     Playa: 'bg-cyan-50 text-cyan-700 border border-cyan-200',
     Montaña: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
     Ciudad: 'bg-violet-50 text-violet-700 border border-violet-200',
@@ -21,31 +21,31 @@ const categoryColors = {
     Aventura: 'bg-rose-50 text-rose-700 border border-rose-200',
 };
 
-const categoryIcons = { Playa: '🏖️', Montaña: '🏔️', Ciudad: '🏙️', Cultural: '🏛️', Aventura: '⛺' };
+const iconosCategorias = { Playa: '🏖️', Montaña: '🏔️', Ciudad: '🏙️', Cultural: '🏛️', Aventura: '⛺' };
 
-export default function DetallePage() {
+export default function PaginaDetalle() {
     const { id } = useParams();
-    const navigate = useNavigate();
-    const { toggleFavorito, isFavorito } = useFavorites();
+    const navegar = useNavigate();
+    const { toggleFavorito, esFavorito } = useFavoritos();
 
     const [viaje, setViaje] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
-    const [modalOpen, setModalOpen] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
+    const [modalAbierto, setModalAbierto] = useState(false);
+    const [estaSobre, setEstaSobre] = useState(false);
 
-    const esFav = viaje ? isFavorito(viaje.id) : false;
+    const esFav = viaje ? esFavorito(viaje.id) : false;
 
     useEffect(() => {
-        setLoading(true);
+        setCargando(true);
         setError(null);
         getViajeById(id)
-            .then((data) => setViaje(data))
+            .then((datos) => setViaje(datos))
             .catch((err) => setError(err.message))
-            .finally(() => setLoading(false));
+            .finally(() => setCargando(false));
     }, [id]);
 
-    if (loading) {
+    if (cargando) {
         return (
             <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10 py-12 animate-pulse">
                 <div className="h-5 w-36 bg-slate-200 rounded-lg mb-8" />
@@ -69,7 +69,7 @@ export default function DetallePage() {
                 <h2 className="text-xl font-bold text-slate-900 mb-2">Destino no encontrado</h2>
                 <p className="text-slate-500 mb-6">{error}</p>
                 <button
-                    onClick={() => navigate('/explorar')}
+                    onClick={() => navegar('/explorar')}
                     className="bg-primary-600 text-white px-6 py-3 rounded-2xl font-semibold hover:bg-primary-700 transition-colors"
                 >
                     Volver a Explorar
@@ -81,40 +81,40 @@ export default function DetallePage() {
     return (
         <div className="min-h-screen bg-slate-50">
             <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10 py-10">
-                {/* Back */}
+                {/* Volver */}
                 <button
-                    onClick={() => navigate('/explorar')}
+                    onClick={() => navegar('/explorar')}
                     className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-primary-600 transition-colors mb-8 group"
                 >
                     <ArrowLeft className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" />
                     Volver a Explorar
                 </button>
 
-                {/* Hero image */}
+                {/* Imagen principal */}
                 <div
                     className="relative h-72 sm:h-[28rem] rounded-3xl overflow-hidden shadow-xl"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
+                    onMouseEnter={() => setEstaSobre(true)}
+                    onMouseLeave={() => setEstaSobre(false)}
                 >
                     <img
                         src={viaje.imagen}
                         alt={viaje.nombre}
-                        className={`w-full h-full object-cover transition-transform duration-700 ease-out ${isHovered ? 'scale-105' : 'scale-100'
+                        className={`w-full h-full object-cover transition-transform duration-700 ease-out ${estaSobre ? 'scale-105' : 'scale-100'
                             }`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-                    {/* Category */}
+                    {/* Categoría */}
                     <div className="absolute top-6 left-6">
-                        <span className={`px-4 py-2 rounded-xl text-sm font-semibold backdrop-blur-sm ${categoryColors[viaje.categoria]}`}>
-                            {categoryIcons[viaje.categoria]} {viaje.categoria}
+                        <span className={`px-4 py-2 rounded-xl text-sm font-semibold backdrop-blur-sm ${coloresCategorias[viaje.categoria]}`}>
+                            {iconosCategorias[viaje.categoria]} {viaje.categoria}
                         </span>
                     </div>
 
-                    {/* Actions */}
+                    {/* Acciones */}
                     <div className="absolute top-6 right-6 flex gap-2">
                         <button
-                            onClick={() => setModalOpen(true)}
+                            onClick={() => setModalAbierto(true)}
                             className="p-3 bg-white/90 backdrop-blur-md rounded-xl text-slate-600 hover:bg-white hover:text-primary-600 transition-all shadow-lg hover:scale-105"
                         >
                             <Share2 className="h-5 w-5" />
@@ -130,7 +130,7 @@ export default function DetallePage() {
                         </button>
                     </div>
 
-                    {/* Title on image */}
+                    {/* Título sobre imagen */}
                     <div className="absolute bottom-6 left-6 right-6">
                         <h1 className="text-3xl sm:text-4xl font-black text-white drop-shadow-lg">
                             {viaje.nombre}
@@ -138,9 +138,9 @@ export default function DetallePage() {
                     </div>
                 </div>
 
-                {/* Content grid */}
+                {/* Cuadrícula de contenido */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-10">
-                    {/* Main */}
+                    {/* Principal */}
                     <div className="lg:col-span-2 space-y-8">
                         <div className="bg-white rounded-2xl border border-slate-200/60 p-6 sm:p-8 shadow-sm">
                             <h2 className="text-xl font-bold text-slate-900 mb-4">
@@ -151,7 +151,7 @@ export default function DetallePage() {
                             </p>
                         </div>
 
-                        {/* Info cards */}
+                        {/* Tarjetas de info */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div className="bg-white rounded-2xl border border-slate-200/60 p-5 shadow-sm">
                                 <div className="flex items-center gap-3 mb-3">
@@ -183,13 +183,13 @@ export default function DetallePage() {
                                     <span className="text-sm text-slate-500">Categoría</span>
                                 </div>
                                 <p className="text-2xl font-bold text-slate-900">
-                                    {categoryIcons[viaje.categoria]} {viaje.categoria}
+                                    {iconosCategorias[viaje.categoria]} {viaje.categoria}
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    {/* Sidebar */}
+                    {/* Barra lateral */}
                     <div>
                         <div className="bg-white rounded-2xl border border-slate-200/60 p-6 shadow-sm sticky top-24">
                             <div className="text-center mb-6">
@@ -222,8 +222,8 @@ export default function DetallePage() {
                 </div>
             </div>
 
-            {/* Share Modal */}
-            <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Compartir destino">
+            {/* Modal Compartir */}
+            <Modal isOpen={modalAbierto} onClose={() => setModalAbierto(false)} title="Compartir destino">
                 <div className="text-center space-y-4">
                     <div className="bg-slate-50 rounded-xl p-4">
                         <p className="text-sm text-slate-500 mb-2">Enlace del destino:</p>
@@ -234,7 +234,7 @@ export default function DetallePage() {
                     <button
                         onClick={() => {
                             navigator.clipboard.writeText(window.location.href);
-                            setModalOpen(false);
+                            setModalAbierto(false);
                         }}
                         className="bg-primary-600 text-white px-6 py-3 rounded-2xl font-semibold hover:bg-primary-700 transition-colors w-full"
                     >

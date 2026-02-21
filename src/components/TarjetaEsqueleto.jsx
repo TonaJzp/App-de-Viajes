@@ -1,10 +1,10 @@
-export default function SkeletonCard() {
+export default function TarjetaEsqueleto() {
     return (
         <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 animate-pulse">
-            {/* Image placeholder */}
+            {/* Placeholder imagen */}
             <div className="h-56 bg-slate-200" />
 
-            {/* Content placeholder */}
+            {/* Placeholder contenido */}
             <div className="p-5 space-y-3">
                 <div className="flex items-center justify-between">
                     <div className="h-5 bg-slate-200 rounded-lg w-3/5" />

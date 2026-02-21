@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Star, MapPin } from 'lucide-react';
-import { useFavorites } from '@/context/FavoritesContext';
+import { useFavoritos } from '@/context/FavoritosContext';
 
-const categoryColors = {
+const coloresCategorias = {
     Playa: 'bg-cyan-50 text-cyan-700 border border-cyan-200',
     Montaña: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
     Ciudad: 'bg-violet-50 text-violet-700 border border-violet-200',
@@ -11,7 +11,7 @@ const categoryColors = {
     Aventura: 'bg-rose-50 text-rose-700 border border-rose-200',
 };
 
-const categoryIcons = {
+const iconosCategorias = {
     Playa: '🏖️',
     Montaña: '🏔️',
     Ciudad: '🏙️',
@@ -19,45 +19,45 @@ const categoryIcons = {
     Aventura: '⛺',
 };
 
-export default function TripCard({ viaje }) {
-    const [isHovered, setIsHovered] = useState(false);
-    const { toggleFavorito, isFavorito } = useFavorites();
-    const esFav = isFavorito(viaje.id);
+export default function TarjetaViaje({ viaje }) {
+    const [estaSobre, setEstaSobre] = useState(false);
+    const { toggleFavorito, esFavorito } = useFavoritos();
+    const esFav = esFavorito(viaje.id);
 
     return (
         <Link
             to={`/explorar/${viaje.id}`}
             className="group block"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onMouseEnter={() => setEstaSobre(true)}
+            onMouseLeave={() => setEstaSobre(false)}
         >
             <article
-                className={`bg-white rounded-2xl overflow-hidden border transition-all duration-300 ${isHovered
+                className={`bg-white rounded-2xl overflow-hidden border transition-all duration-300 ${estaSobre
                     ? 'shadow-xl shadow-primary-500/10 -translate-y-1.5 border-primary-200'
                     : 'shadow-sm border-slate-200/80'
                     }`}
             >
-                {/* Image container */}
+                {/* Contenedor imagen */}
                 <div className="relative h-56 overflow-hidden">
                     <img
                         src={viaje.imagen}
                         alt={viaje.nombre}
                         loading="lazy"
-                        className={`w-full h-full object-cover transition-transform duration-700 ease-out ${isHovered ? 'scale-110' : 'scale-100'
+                        className={`w-full h-full object-cover transition-transform duration-700 ease-out ${estaSobre ? 'scale-110' : 'scale-100'
                             }`}
                     />
-                    {/* Gradient overlay */}
+                    {/* Gradiente */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
 
-                    {/* Category badge */}
+                    {/* Badge categoría */}
                     <span
-                        className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${categoryColors[viaje.categoria] || 'bg-slate-100 text-slate-700'
+                        className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${coloresCategorias[viaje.categoria] || 'bg-slate-100 text-slate-700'
                             }`}
                     >
-                        {categoryIcons[viaje.categoria]} {viaje.categoria}
+                        {iconosCategorias[viaje.categoria]} {viaje.categoria}
                     </span>
 
-                    {/* Favorite button */}
+                    {/* Botón favorito */}
                     <button
                         onClick={(e) => {
                             e.preventDefault();
@@ -73,7 +73,7 @@ export default function TripCard({ viaje }) {
                         <Heart className={`h-4 w-4 ${esFav ? 'fill-white' : ''}`} />
                     </button>
 
-                    {/* Price tag */}
+                    {/* Precio */}
                     <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-sm">
                         <span className="text-sm font-bold text-slate-900">
                             {viaje.precio_estimado.toLocaleString('es-ES')} €
@@ -81,7 +81,7 @@ export default function TripCard({ viaje }) {
                     </div>
                 </div>
 
-                {/* Card body */}
+                {/* Cuerpo tarjeta */}
                 <div className="p-5">
                     <div className="flex items-start justify-between gap-3 mb-3">
                         <h3 className="text-base font-bold text-slate-900 group-hover:text-primary-600 transition-colors leading-snug line-clamp-1">
@@ -100,7 +100,7 @@ export default function TripCard({ viaje }) {
                     </p>
 
                     <div
-                        className={`flex items-center gap-1.5 text-xs font-semibold transition-all duration-300 ${isHovered
+                        className={`flex items-center gap-1.5 text-xs font-semibold transition-all duration-300 ${estaSobre
                             ? 'text-primary-600 translate-x-1'
                             : 'text-slate-400'
                             }`}

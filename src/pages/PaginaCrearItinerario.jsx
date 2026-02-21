@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { PlaneTakeoff, MapPin, Calendar, Wallet, StickyNote, Send } from 'lucide-react';
 import { createItinerario } from '@/services/api';
-import Toast from '@/components/Toast';
+import { useItinerarios } from '@/context/ItinerariosContext';
+import Notificacion from '@/components/Notificacion';
 
-const initialForm = {
+const formularioInicial = {
     nombre: '',
     destino: '',
     fechaInicio: '',
@@ -12,65 +13,67 @@ const initialForm = {
     notas: '',
 };
 
-export default function CrearItinerarioPage() {
-    const [form, setForm] = useState(initialForm);
-    const [loading, setLoading] = useState(false);
-    const [toast, setToast] = useState(null);
-    const [errors, setErrors] = useState({});
+export default function PaginaCrearItinerario() {
+    const { agregarItinerario } = useItinerarios();
+    const [formulario, setFormulario] = useState(formularioInicial);
+    const [cargando, setCargando] = useState(false);
+    const [notificacion, setNotificacion] = useState(null);
+    const [errores, setErrores] = useState({});
 
-    const handleChange = (e) => {
+    const manejarCambio = (e) => {
         const { name, value } = e.target;
-        setForm((prev) => ({ ...prev, [name]: value }));
-        if (errors[name]) {
-            setErrors((prev) => ({ ...prev, [name]: null }));
+        setFormulario((prev) => ({ ...prev, [name]: value }));
+        if (errores[name]) {
+            setErrores((prev) => ({ ...prev, [name]: null }));
         }
     };
 
-    const validate = () => {
-        const newErrors = {};
-        if (!form.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
-        if (!form.destino.trim()) newErrors.destino = 'El destino es obligatorio';
-        if (!form.fechaInicio) newErrors.fechaInicio = 'Selecciona una fecha de inicio';
-        if (!form.fechaFin) newErrors.fechaFin = 'Selecciona una fecha de fin';
-        if (form.fechaInicio && form.fechaFin && form.fechaInicio > form.fechaFin) {
-            newErrors.fechaFin = 'La fecha fin debe ser posterior a la de inicio';
+    const validar = () => {
+        const nuevosErrores = {};
+        if (!formulario.nombre.trim()) nuevosErrores.nombre = 'El nombre es obligatorio';
+        if (!formulario.destino.trim()) nuevosErrores.destino = 'El destino es obligatorio';
+        if (!formulario.fechaInicio) nuevosErrores.fechaInicio = 'Selecciona una fecha de inicio';
+        if (!formulario.fechaFin) nuevosErrores.fechaFin = 'Selecciona una fecha de fin';
+        if (formulario.fechaInicio && formulario.fechaFin && formulario.fechaInicio > formulario.fechaFin) {
+            nuevosErrores.fechaFin = 'La fecha fin debe ser posterior a la de inicio';
         }
-        if (!form.presupuesto || Number(form.presupuesto) <= 0) {
-            newErrors.presupuesto = 'Ingresa un presupuesto válido';
+        if (!formulario.presupuesto || Number(formulario.presupuesto) <= 0) {
+            nuevosErrores.presupuesto = 'Ingresa un presupuesto válido';
         }
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+        setErrores(nuevosErrores);
+        return Object.keys(nuevosErrores).length === 0;
     };
 
-    const handleSubmit = async (e) => {
+    const manejarEnvio = async (e) => {
         e.preventDefault();
-        if (!validate()) return;
+        if (!validar()) return;
 
-        setLoading(true);
+        setCargando(true);
         try {
-            await createItinerario({
-                ...form,
-                presupuesto: Number(form.presupuesto),
+            const resultado = await createItinerario({
+                ...formulario,
+                presupuesto: Number(formulario.presupuesto),
             });
-            setToast({ message: '¡Itinerario creado exitosamente! 🎉', type: 'success' });
-            setForm(initialForm);
-            setErrors({});
+            agregarItinerario(resultado.data);
+            setNotificacion({ message: '¡Itinerario creado exitosamente!', type: 'success' });
+            setFormulario(formularioInicial);
+            setErrores({});
         } catch {
-            setToast({ message: 'Error al crear el itinerario. Inténtalo de nuevo.', type: 'error' });
+            setNotificacion({ message: 'Error al crear el itinerario. Inténtalo de nuevo.', type: 'error' });
         } finally {
-            setLoading(false);
+            setCargando(false);
         }
     };
 
-    const inputClass = (field) =>
-        `w-full px-4 py-3.5 bg-slate-50 border rounded-2xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:bg-white transition-all ${errors[field]
+    const claseInput = (campo) =>
+        `w-full px-4 py-3.5 bg-slate-50 border rounded-2xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:bg-white transition-all ${errores[campo]
             ? 'border-rose-300 focus:ring-rose-500/20 focus:border-rose-400'
             : 'border-slate-200 focus:ring-primary-500/20 focus:border-primary-400'
         }`;
 
     return (
         <div className="min-h-screen bg-slate-50">
-            {/* Header */}
+            {/* Cabecera */}
             <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-12 pb-20">
                     <div className="flex items-center gap-3 mb-4">
@@ -86,10 +89,10 @@ export default function CrearItinerarioPage() {
                 </div>
             </div>
 
-            {/* Form card — floating */}
+            {/* Tarjeta formulario — flotante */}
             <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-10 -mt-8 pb-20">
                 <form
-                    onSubmit={handleSubmit}
+                    onSubmit={manejarEnvio}
                     className="bg-white rounded-2xl shadow-xl border border-slate-200/60 p-8 sm:p-10"
                     noValidate
                 >
@@ -107,13 +110,13 @@ export default function CrearItinerarioPage() {
                                 id="nombre"
                                 name="nombre"
                                 type="text"
-                                value={form.nombre}
-                                onChange={handleChange}
+                                value={formulario.nombre}
+                                onChange={manejarCambio}
                                 placeholder="Ej: Vacaciones de verano 2026"
-                                className={inputClass('nombre')}
+                                className={claseInput('nombre')}
                             />
-                            {errors.nombre && (
-                                <p className="mt-2 text-xs text-rose-500 font-medium">{errors.nombre}</p>
+                            {errores.nombre && (
+                                <p className="mt-2 text-xs text-rose-500 font-medium">{errores.nombre}</p>
                             )}
                         </div>
 
@@ -130,17 +133,17 @@ export default function CrearItinerarioPage() {
                                 id="destino"
                                 name="destino"
                                 type="text"
-                                value={form.destino}
-                                onChange={handleChange}
+                                value={formulario.destino}
+                                onChange={manejarCambio}
                                 placeholder="Ej: Cancún, México"
-                                className={inputClass('destino')}
+                                className={claseInput('destino')}
                             />
-                            {errors.destino && (
-                                <p className="mt-2 text-xs text-rose-500 font-medium">{errors.destino}</p>
+                            {errores.destino && (
+                                <p className="mt-2 text-xs text-rose-500 font-medium">{errores.destino}</p>
                             )}
                         </div>
 
-                        {/* Dates */}
+                        {/* Fechas */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <div>
                                 <label
@@ -154,12 +157,12 @@ export default function CrearItinerarioPage() {
                                     id="fechaInicio"
                                     name="fechaInicio"
                                     type="date"
-                                    value={form.fechaInicio}
-                                    onChange={handleChange}
-                                    className={inputClass('fechaInicio')}
+                                    value={formulario.fechaInicio}
+                                    onChange={manejarCambio}
+                                    className={claseInput('fechaInicio')}
                                 />
-                                {errors.fechaInicio && (
-                                    <p className="mt-2 text-xs text-rose-500 font-medium">{errors.fechaInicio}</p>
+                                {errores.fechaInicio && (
+                                    <p className="mt-2 text-xs text-rose-500 font-medium">{errores.fechaInicio}</p>
                                 )}
                             </div>
                             <div>
@@ -174,12 +177,12 @@ export default function CrearItinerarioPage() {
                                     id="fechaFin"
                                     name="fechaFin"
                                     type="date"
-                                    value={form.fechaFin}
-                                    onChange={handleChange}
-                                    className={inputClass('fechaFin')}
+                                    value={formulario.fechaFin}
+                                    onChange={manejarCambio}
+                                    className={claseInput('fechaFin')}
                                 />
-                                {errors.fechaFin && (
-                                    <p className="mt-2 text-xs text-rose-500 font-medium">{errors.fechaFin}</p>
+                                {errores.fechaFin && (
+                                    <p className="mt-2 text-xs text-rose-500 font-medium">{errores.fechaFin}</p>
                                 )}
                             </div>
                         </div>
@@ -198,13 +201,13 @@ export default function CrearItinerarioPage() {
                                 name="presupuesto"
                                 type="number"
                                 min="0"
-                                value={form.presupuesto}
-                                onChange={handleChange}
+                                value={formulario.presupuesto}
+                                onChange={manejarCambio}
                                 placeholder="Ej: 2000"
-                                className={inputClass('presupuesto')}
+                                className={claseInput('presupuesto')}
                             />
-                            {errors.presupuesto && (
-                                <p className="mt-2 text-xs text-rose-500 font-medium">{errors.presupuesto}</p>
+                            {errores.presupuesto && (
+                                <p className="mt-2 text-xs text-rose-500 font-medium">{errores.presupuesto}</p>
                             )}
                         </div>
 
@@ -221,25 +224,25 @@ export default function CrearItinerarioPage() {
                             <textarea
                                 id="notas"
                                 name="notas"
-                                value={form.notas}
-                                onChange={handleChange}
+                                value={formulario.notas}
+                                onChange={manejarCambio}
                                 rows={4}
                                 placeholder="Ej: Quiero visitar los cenotes y probar comida local..."
-                                className={`${inputClass('notas')} resize-none`}
+                                className={`${claseInput('notas')} resize-none`}
                             />
                         </div>
                     </div>
 
-                    {/* Submit */}
+                    {/* Enviar */}
                     <button
                         type="submit"
-                        disabled={loading}
-                        className={`mt-8 w-full py-4 rounded-2xl font-semibold text-white transition-all flex items-center justify-center gap-2 ${loading
+                        disabled={cargando}
+                        className={`mt-8 w-full py-4 rounded-2xl font-semibold text-white transition-all flex items-center justify-center gap-2 ${cargando
                             ? 'bg-primary-400 cursor-not-allowed'
                             : 'bg-primary-600 hover:bg-primary-700 shadow-lg shadow-primary-600/25 hover:shadow-xl hover:-translate-y-0.5'
                             }`}
                     >
-                        {loading ? (
+                        {cargando ? (
                             <>
                                 <div className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                                 Creando itinerario...
@@ -254,12 +257,12 @@ export default function CrearItinerarioPage() {
                 </form>
             </div>
 
-            {/* Toast */}
-            {toast && (
-                <Toast
-                    message={toast.message}
-                    type={toast.type}
-                    onClose={() => setToast(null)}
+            {/* Notificación */}
+            {notificacion && (
+                <Notificacion
+                    message={notificacion.message}
+                    type={notificacion.type}
+                    onClose={() => setNotificacion(null)}
                 />
             )}
         </div>

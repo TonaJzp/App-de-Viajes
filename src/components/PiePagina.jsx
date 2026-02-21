@@ -1,14 +1,13 @@
-import { Github, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function Footer() {
+export default function PiePagina() {
     return (
         <footer className="bg-slate-900 text-slate-400 mt-auto">
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-14">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    {/* Brand */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 place-items-center text-center">
+                    {/* Marca */}
                     <div>
-                        <div className="flex items-center gap-3 mb-4">
+                        <div className="flex items-center justify-center gap-3 mb-4">
                             <img
                                 src="/imagenes/logo.svg"
                                 alt="PlanyRuta"
@@ -22,7 +21,7 @@ export default function Footer() {
                         </p>
                     </div>
 
-                    {/* Links */}
+                    {/* Enlaces */}
                     <div>
                         <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Navegación</h3>
                         <ul className="space-y-3 text-sm">
@@ -39,6 +38,11 @@ export default function Footer() {
                             <li>
                                 <Link to="/crear" className="hover:text-white transition-colors">
                                     Crear Itinerario
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/mis-itinerarios" className="hover:text-white transition-colors">
+                                    Mis Itinerarios
                                 </Link>
                             </li>
                         </ul>
@@ -77,22 +81,10 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="border-t border-slate-800 mt-12 pt-8 flex items-center justify-center">
                     <p className="text-xs text-slate-500">
-                        © 2026 PlanyRuta. Hecho con{' '}
-                        <Heart className="inline h-3 w-3 text-rose-500 fill-rose-500" /> para
-                        amantes de los viajes.
+                        © 2026 PlanyRuta.
                     </p>
-                    <div className="flex items-center gap-4">
-                        <a
-                            href="https://github.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-white transition-colors"
-                        >
-                            <Github className="h-5 w-5" />
-                        </a>
-                    </div>
                 </div>
             </div>
         </footer>

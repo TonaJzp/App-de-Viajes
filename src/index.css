@@ -18,9 +18,9 @@
 }
 
 /*
-  All custom CSS MUST be inside @layer base so it doesn't
-  override Tailwind utilities like mx-auto, px-*, etc.
-  Unlayered CSS always beats @layer in the cascade.
+  Todo el CSS personalizado DEBE estar dentro de @layer base para que no
+  sobreescriba las utilidades de Tailwind como mx-auto, px-*, etc.
+  El CSS sin capa siempre gana a @layer en la cascada.
 */
 @layer base {
   html {
@@ -47,7 +47,7 @@
     max-width: 100%;
   }
 
-  /* Custom scrollbar */
+  /* Barra de desplazamiento personalizada */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -66,7 +66,7 @@
   }
 }
 
-/* Utilities that Tailwind v4 may not include by default */
+/* Utilidades que Tailwind v4 puede no incluir por defecto */
 @layer utilities {
   .line-clamp-1 {
     display: -webkit-box;

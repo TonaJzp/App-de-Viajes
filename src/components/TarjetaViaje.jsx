@@ -49,7 +49,7 @@ export default function TarjetaViaje({ viaje }) {
                     {/* Gradiente */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
 
-                    {/* Badge categoría */}
+                    {/* Etiqueta categoría */}
                     <span
                         className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${coloresCategorias[viaje.categoria] || 'bg-slate-100 text-slate-700'
                             }`}

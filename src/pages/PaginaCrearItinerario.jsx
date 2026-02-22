@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { PlaneTakeoff, MapPin, Calendar, Wallet, StickyNote, Send } from 'lucide-react';
-import { createItinerario } from '@/services/api';
+import { crearItinerario } from '@/services/api';
 import { useItinerarios } from '@/context/ItinerariosContext';
 import Notificacion from '@/components/Notificacion';
 
@@ -50,16 +50,16 @@ export default function PaginaCrearItinerario() {
 
         setCargando(true);
         try {
-            const resultado = await createItinerario({
+            const resultado = await crearItinerario({
                 ...formulario,
                 presupuesto: Number(formulario.presupuesto),
             });
-            agregarItinerario(resultado.data);
-            setNotificacion({ message: '¡Itinerario creado exitosamente!', type: 'success' });
+            agregarItinerario(resultado.datos);
+            setNotificacion({ mensaje: '¡Itinerario creado exitosamente!', tipo: 'exito' });
             setFormulario(formularioInicial);
             setErrores({});
         } catch {
-            setNotificacion({ message: 'Error al crear el itinerario. Inténtalo de nuevo.', type: 'error' });
+            setNotificacion({ mensaje: 'Error al crear el itinerario. Inténtalo de nuevo.', tipo: 'error' });
         } finally {
             setCargando(false);
         }
@@ -260,9 +260,9 @@ export default function PaginaCrearItinerario() {
             {/* Notificación */}
             {notificacion && (
                 <Notificacion
-                    message={notificacion.message}
-                    type={notificacion.type}
-                    onClose={() => setNotificacion(null)}
+                    mensaje={notificacion.mensaje}
+                    tipo={notificacion.tipo}
+                    alCerrar={() => setNotificacion(null)}
                 />
             )}
         </div>

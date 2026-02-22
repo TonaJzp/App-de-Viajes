@@ -76,7 +76,7 @@ export default function PaginaMisItinerarios() {
                                     <div className="flex items-center gap-2"><Wallet className="h-4 w-4 text-primary-500 shrink-0" /><span className="font-semibold text-slate-900">{it.presupuesto.toLocaleString('es-ES')} €</span></div>
                                     {it.notas && (<div className="flex items-start gap-2 pt-2 border-t border-slate-100"><StickyNote className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" /><p className="text-slate-500 line-clamp-2">{it.notas}</p></div>)}
                                 </div>
-                                <div className="mt-4 pt-3 border-t border-slate-100"><p className="text-xs text-slate-400">Creado el {formatearFecha(it.createdAt)}</p></div>
+                                <div className="mt-4 pt-3 border-t border-slate-100"><p className="text-xs text-slate-400">Creado el {formatearFecha(it.creadoEn)}</p></div>
                             </div>
                         ))}
                     </div>
@@ -89,7 +89,7 @@ export default function PaginaMisItinerarios() {
                     </div>
                 )}
             </div>
-            <Modal isOpen={!!elementoEditando} onClose={() => setElementoEditando(null)} title={`Editar: ${elementoEditando?.nombre || ''}`}>
+            <Modal estaAbierto={!!elementoEditando} alCerrar={() => setElementoEditando(null)} titulo={`Editar: ${elementoEditando?.nombre || ''}`}>
                 <form onSubmit={manejarEnvioEdicion} className="space-y-5">
                     <div>
                         <label htmlFor="editFechaInicio" className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2"><Calendar className="h-4 w-4 text-slate-400" />Fecha de Inicio</label>

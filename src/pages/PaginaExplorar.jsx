@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Compass, AlertTriangle, SearchX, ChevronLeft, ChevronRight } from 'lucide-react';
-import { getViajes } from '@/services/api';
+import { obtenerViajes } from '@/services/api';
 import TarjetaViaje from '@/components/TarjetaViaje';
 import BarraBusqueda from '@/components/BarraBusqueda';
 import FiltroCategorias from '@/components/FiltroCategorias';
@@ -19,7 +19,7 @@ export default function PaginaExplorar() {
     useEffect(() => {
         setCargando(true);
         setError(null);
-        getViajes()
+        obtenerViajes()
             .then((datos) => setViajes(datos))
             .catch((err) => setError(err.message))
             .finally(() => setCargando(false));
@@ -87,7 +87,7 @@ export default function PaginaExplorar() {
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 -mt-8">
                 <div className="bg-white rounded-2xl shadow-lg border border-slate-200/60 p-5 sm:p-6">
                     <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-                        <BarraBusqueda value={terminoBusqueda} onChange={setTerminoBusqueda} />
+                        <BarraBusqueda valor={terminoBusqueda} alCambiar={setTerminoBusqueda} />
                         <FiltroCategorias
                             seleccionada={categoriaSeleccionada}
                             alSeleccionar={setCategoriaSeleccionada}

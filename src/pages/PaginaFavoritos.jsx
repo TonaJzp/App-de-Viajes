@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Heart, AlertTriangle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { getViajes } from '@/services/api';
+import { obtenerViajes } from '@/services/api';
 import { useFavoritos } from '@/context/FavoritosContext';
 import TarjetaViaje from '@/components/TarjetaViaje';
 import TarjetaEsqueleto from '@/components/TarjetaEsqueleto';
@@ -15,7 +15,7 @@ export default function PaginaFavoritos() {
     useEffect(() => {
         setCargando(true);
         setError(null);
-        getViajes()
+        obtenerViajes()
             .then((datos) => {
                 const viajesFav = datos.filter((v) => favoritos.includes(v.id));
                 setViajes(viajesFav);

@@ -1,16 +1,16 @@
 import dbData from '@/data/db.json';
 
-const SIMULATED_DELAY = 800;
+const RETRASO_SIMULADO = 800;
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export async function getViajes() {
-    await delay(SIMULATED_DELAY);
+export async function obtenerViajes() {
+    await delay(RETRASO_SIMULADO);
     return dbData.viajes;
 }
 
-export async function getViajeById(id) {
-    await delay(SIMULATED_DELAY / 2);
+export async function obtenerViajePorId(id) {
+    await delay(RETRASO_SIMULADO / 2);
     const viaje = dbData.viajes.find((v) => v.id === Number(id));
     if (!viaje) {
         throw new Error(`No se encontró el viaje con id ${id}`);
@@ -18,20 +18,20 @@ export async function getViajeById(id) {
     return viaje;
 }
 
-export async function getViajesByCategoria(categoria) {
-    await delay(SIMULATED_DELAY);
+export async function obtenerViajesPorCategoria(categoria) {
+    await delay(RETRASO_SIMULADO);
     if (!categoria || categoria === 'Todos') {
         return dbData.viajes;
     }
     return dbData.viajes.filter((v) => v.categoria === categoria);
 }
 
-export async function createItinerario(itinerario) {
+export async function crearItinerario(itinerario) {
     await delay(1000);
-    const newItinerario = {
+    const nuevoItinerario = {
         id: Date.now(),
         ...itinerario,
-        createdAt: new Date().toISOString(),
+        creadoEn: new Date().toISOString(),
     };
-    return { success: true, data: newItinerario };
+    return { exito: true, datos: nuevoItinerario };
 }

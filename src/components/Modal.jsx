@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { X } from 'lucide-react';
 
-export default function Modal({ isOpen, onClose, title, children }) {
+export default function Modal({ estaAbierto, alCerrar, titulo, children }) {
     useEffect(() => {
-        if (isOpen) {
+        if (estaAbierto) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = '';
@@ -11,32 +11,32 @@ export default function Modal({ isOpen, onClose, title, children }) {
         return () => {
             document.body.style.overflow = '';
         };
-    }, [isOpen]);
+    }, [estaAbierto]);
 
-    if (!isOpen) return null;
+    if (!estaAbierto) return null;
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            {/* Backdrop */}
+            {/* Fondo */}
             <div
                 className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-                onClick={onClose}
+                onClick={alCerrar}
             />
 
-            {/* Modal content */}
+            {/* Contenido del Modal */}
             <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto animate-in zoom-in-95">
-                {/* Header */}
+                {/* Cabecera */}
                 <div className="flex items-center justify-between p-6 border-b border-slate-100">
-                    <h2 className="text-lg font-bold text-slate-900">{title}</h2>
+                    <h2 className="text-lg font-bold text-slate-900">{titulo}</h2>
                     <button
-                        onClick={onClose}
+                        onClick={alCerrar}
                         className="p-2 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
                     >
                         <X className="h-5 w-5" />
                     </button>
                 </div>
 
-                {/* Body */}
+                {/* Cuerpo */}
                 <div className="p-6">{children}</div>
             </div>
         </div>

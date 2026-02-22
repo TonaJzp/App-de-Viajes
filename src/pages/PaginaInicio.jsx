@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Compass, MapPinned, PlaneTakeoff, Sparkles } from 'lucide-react';
-import { getViajes } from '@/services/api';
+import { obtenerViajes } from '@/services/api';
 import TarjetaViaje from '@/components/TarjetaViaje';
 import TarjetaEsqueleto from '@/components/TarjetaEsqueleto';
 
@@ -10,7 +10,7 @@ export default function PaginaInicio() {
     const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
-        getViajes()
+        obtenerViajes()
             .then((datos) => {
                 const ordenados = [...datos].sort((a, b) => b.rating - a.rating).slice(0, 3);
                 setViajesDestacados(ordenados);
@@ -45,7 +45,7 @@ export default function PaginaInicio() {
 
                 <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-20 pb-32 sm:pt-28¡ sm:pb-40 lg:pt-22 lg:pb-48">
                     <div className="max-w-2xl">
-                        {/* Badge */}
+                        {/* Etiqueta */}
                         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-8 border border-white/20">
                             <Sparkles className="h-4 w-4 text-accent-400" />
                             <span className="text-sm font-medium text-white/90">
@@ -108,20 +108,20 @@ export default function PaginaInicio() {
             <section className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 -mt-16 sm:-mt-20">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                     {[
-                        { icon: MapPinned, value: '50+', label: 'Destinos Únicos' },
-                        { icon: Compass, value: '5', label: 'Categorías' },
-                        { icon: PlaneTakeoff, value: '∞', label: 'Aventuras' },
+                        { icono: MapPinned, valor: '50+', etiqueta: 'Destinos Únicos' },
+                        { icono: Compass, valor: '5', etiqueta: 'Categorías' },
+                        { icono: PlaneTakeoff, valor: '∞', etiqueta: 'Aventuras' },
                     ].map((dato, i) => (
                         <div
                             key={i}
                             className="bg-white rounded-2xl p-6 shadow-md border border-slate-100/80 flex items-center gap-4 hover:shadow-lg transition-shadow duration-300"
                         >
                             <div className="bg-primary-50 p-3.5 rounded-xl shrink-0">
-                                <dato.icon className="h-6 w-6 text-primary-600" />
+                                <dato.icono className="h-6 w-6 text-primary-600" />
                             </div>
                             <div>
-                                <div className="text-2xl font-bold text-slate-900">{dato.value}</div>
-                                <div className="text-sm text-slate-500">{dato.label}</div>
+                                <div className="text-2xl font-bold text-slate-900">{dato.valor}</div>
+                                <div className="text-sm text-slate-500">{dato.etiqueta}</div>
                             </div>
                         </div>
                     ))}

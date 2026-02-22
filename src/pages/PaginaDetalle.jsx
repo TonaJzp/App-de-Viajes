@@ -9,7 +9,7 @@ import {
     Share2,
     AlertTriangle,
 } from 'lucide-react';
-import { getViajeById } from '@/services/api';
+import { obtenerViajePorId } from '@/services/api';
 import { useFavoritos } from '@/context/FavoritosContext';
 import Modal from '@/components/Modal';
 
@@ -39,7 +39,7 @@ export default function PaginaDetalle() {
     useEffect(() => {
         setCargando(true);
         setError(null);
-        getViajeById(id)
+        obtenerViajePorId(id)
             .then((datos) => setViaje(datos))
             .catch((err) => setError(err.message))
             .finally(() => setCargando(false));
@@ -223,7 +223,7 @@ export default function PaginaDetalle() {
             </div>
 
             {/* Modal Compartir */}
-            <Modal isOpen={modalAbierto} onClose={() => setModalAbierto(false)} title="Compartir destino">
+            <Modal estaAbierto={modalAbierto} alCerrar={() => setModalAbierto(false)} titulo="Compartir destino">
                 <div className="text-center space-y-4">
                     <div className="bg-slate-50 rounded-xl p-4">
                         <p className="text-sm text-slate-500 mb-2">Enlace del destino:</p>

@@ -3,21 +3,19 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Compass, MapPinned, PlaneTakeoff, Sparkles } from 'lucide-react';
 import { obtenerViajes } from '@/services/api';
 import TarjetaViaje from '@/components/TarjetaViaje';
-import TarjetaEsqueleto from '@/components/TarjetaEsqueleto';
 
 export default function PaginaInicio() {
     const [viajesDestacados, setViajesDestacados] = useState([]);
-    const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
         obtenerViajes()
             .then((datos) => {
+                // Ordena los viajes por rating de mayor a menor y toma los 3 primeros
                 const ordenados = [...datos].sort((a, b) => b.rating - a.rating).slice(0, 3);
                 setViajesDestacados(ordenados);
             })
-            .catch(console.error)
-            .finally(() => setCargando(false));
-    }, []);
+            .catch(console.error);
+    }, []); // Solo se ejecuta una vez al montar el componente
 
     return (
         <div>
@@ -148,11 +146,9 @@ export default function PaginaInicio() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                    {cargando
-                        ? Array.from({ length: 3 }).map((_, i) => <TarjetaEsqueleto key={i} />)
-                        : viajesDestacados.map((viaje) => (
-                            <TarjetaViaje key={viaje.id} viaje={viaje} />
-                        ))}
+                    {viajesDestacados.map((viaje) => (
+                        <TarjetaViaje key={viaje.id} viaje={viaje} />
+                    ))}
                 </div>
 
                 <div className="mt-10 text-center sm:hidden">

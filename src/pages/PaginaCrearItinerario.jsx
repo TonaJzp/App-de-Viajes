@@ -16,13 +16,15 @@ const formularioInicial = {
 export default function PaginaCrearItinerario() {
     const { agregarItinerario } = useItinerarios();
     const [formulario, setFormulario] = useState(formularioInicial);
-    const [cargando, setCargando] = useState(false);
+
     const [notificacion, setNotificacion] = useState(null);
     const [errores, setErrores] = useState({});
 
     const manejarCambio = (e) => {
         const { name, value } = e.target;
+        //
         setFormulario((prev) => ({ ...prev, [name]: value }));
+        // Elimina el error cuando el usuario empieza a escribir
         if (errores[name]) {
             setErrores((prev) => ({ ...prev, [name]: null }));
         }
@@ -48,7 +50,6 @@ export default function PaginaCrearItinerario() {
         e.preventDefault();
         if (!validar()) return;
 
-        setCargando(true);
         try {
             const resultado = await crearItinerario({
                 ...formulario,
@@ -60,8 +61,6 @@ export default function PaginaCrearItinerario() {
             setErrores({});
         } catch {
             setNotificacion({ mensaje: 'Error al crear el itinerario. Inténtalo de nuevo.', tipo: 'error' });
-        } finally {
-            setCargando(false);
         }
     };
 
@@ -236,23 +235,10 @@ export default function PaginaCrearItinerario() {
                     {/* Enviar */}
                     <button
                         type="submit"
-                        disabled={cargando}
-                        className={`mt-8 w-full py-4 rounded-2xl font-semibold text-white transition-all flex items-center justify-center gap-2 ${cargando
-                            ? 'bg-primary-400 cursor-not-allowed'
-                            : 'bg-primary-600 hover:bg-primary-700 shadow-lg shadow-primary-600/25 hover:shadow-xl hover:-translate-y-0.5'
-                            }`}
+                        className="mt-8 w-full py-4 rounded-2xl font-semibold text-white transition-all flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 shadow-lg shadow-primary-600/25 hover:shadow-xl hover:-translate-y-0.5"
                     >
-                        {cargando ? (
-                            <>
-                                <div className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                Creando itinerario...
-                            </>
-                        ) : (
-                            <>
-                                <Send className="h-5 w-5" />
-                                Crear Itinerario
-                            </>
-                        )}
+                        <Send className="h-5 w-5" />
+                        Crear Itinerario
                     </button>
                 </form>
             </div>

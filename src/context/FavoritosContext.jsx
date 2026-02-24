@@ -1,20 +1,18 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const FavoritosContext = createContext();
 
 export function FavoritosProvider({ children }) {
     const [favoritos, setFavoritos] = useState([]);
 
-    const toggleFavorito = useCallback((id) => {
+    const toggleFavorito = (id) => {
         setFavoritos((prev) =>
+            // si el id esta en favoritos, lo quita, si no, lo añade
             prev.includes(id) ? prev.filter((fId) => fId !== id) : [...prev, id]
         );
-    }, []);
+    };
 
-    const esFavorito = useCallback(
-        (id) => favoritos.includes(id),
-        [favoritos]
-    );
+    const esFavorito = (id) => favoritos.includes(id);
 
     const totalFavoritos = favoritos.length;
 

@@ -1,33 +1,33 @@
-import dbData from '@/data/db.json';
-
-const RETRASO_SIMULADO = 800;
-
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const API_URL = 'http://localhost:3001';
 
 export async function obtenerViajes() {
-    await delay(RETRASO_SIMULADO);
-    return dbData.viajes;
+    const respuesta = await fetch(`${API_URL}/viajes`);
+    if (!respuesta.ok) {
+        throw new Error('Error al obtener los viajes');
+    }
+    return respuesta.json();
 }
 
 export async function obtenerViajePorId(id) {
-    await delay(RETRASO_SIMULADO / 2);
-    const viaje = dbData.viajes.find((v) => v.id === Number(id));
-    if (!viaje) {
+    const respuesta = await fetch(`${API_URL}/viajes/${id}`);
+    if (!respuesta.ok) {
         throw new Error(`No se encontró el viaje con id ${id}`);
     }
-    return viaje;
+    return respuesta.json();
 }
 
 export async function obtenerViajesPorCategoria(categoria) {
-    await delay(RETRASO_SIMULADO);
     if (!categoria || categoria === 'Todos') {
-        return dbData.viajes;
+        return obtenerViajes();
     }
-    return dbData.viajes.filter((v) => v.categoria === categoria);
+    const respuesta = await fetch(`${API_URL}/viajes?categoria=${categoria}`);
+    if (!respuesta.ok) {
+        throw new Error('Error al filtrar viajes por categoría');
+    }
+    return respuesta.json();
 }
 
 export async function crearItinerario(itinerario) {
-    await delay(1000);
     const nuevoItinerario = {
         id: Date.now(),
         ...itinerario,

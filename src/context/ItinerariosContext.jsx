@@ -1,29 +1,24 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const ItinerariosContext = createContext();
 
 export function ItinerariosProvider({ children }) {
     const [itinerarios, setItinerarios] = useState([]);
 
-    const agregarItinerario = useCallback((itinerario) => {
+    const agregarItinerario = (itinerario) => {
         setItinerarios((prev) => [itinerario, ...prev]);
-    }, []);
+    };
 
-    const eliminarItinerario = useCallback((id) => {
+    const eliminarItinerario = (id) => {
         setItinerarios((prev) => prev.filter((it) => it.id !== id));
-    }, []);
+    };
 
-    const actualizarItinerario = useCallback((id, cambios) => {
-        setItinerarios((prev) =>
-            prev.map((it) => (it.id === id ? { ...it, ...cambios } : it))
-        );
-    }, []);
 
     const totalItinerarios = itinerarios.length;
 
     return (
         <ItinerariosContext.Provider
-            value={{ itinerarios, agregarItinerario, eliminarItinerario, actualizarItinerario, totalItinerarios }}
+            value={{ itinerarios, agregarItinerario, eliminarItinerario, totalItinerarios }}
         >
             {children}
         </ItinerariosContext.Provider>

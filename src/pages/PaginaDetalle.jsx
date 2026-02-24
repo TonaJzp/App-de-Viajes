@@ -6,12 +6,10 @@ import {
     Star,
     DollarSign,
     Tag,
-    Share2,
     AlertTriangle,
 } from 'lucide-react';
 import { obtenerViajePorId } from '@/services/api';
 import { useFavoritos } from '@/context/FavoritosContext';
-import Modal from '@/components/Modal';
 
 const coloresCategorias = {
     Playa: 'bg-cyan-50 text-cyan-700 border border-cyan-200',
@@ -31,7 +29,7 @@ export default function PaginaDetalle() {
     const [viaje, setViaje] = useState(null);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
-    const [modalAbierto, setModalAbierto] = useState(false);
+
     const [estaSobre, setEstaSobre] = useState(false);
 
     const esFav = viaje ? esFavorito(viaje.id) : false;
@@ -111,14 +109,8 @@ export default function PaginaDetalle() {
                         </span>
                     </div>
 
-                    {/* Acciones */}
-                    <div className="absolute top-6 right-6 flex gap-2">
-                        <button
-                            onClick={() => setModalAbierto(true)}
-                            className="p-3 bg-white/90 backdrop-blur-md rounded-xl text-slate-600 hover:bg-white hover:text-primary-600 transition-all shadow-lg hover:scale-105"
-                        >
-                            <Share2 className="h-5 w-5" />
-                        </button>
+                    {/* Favorito */}
+                    <div className="absolute top-6 right-6">
                         <button
                             onClick={() => toggleFavorito(viaje.id)}
                             className={`p-3 rounded-xl backdrop-blur-md transition-all shadow-lg hover:scale-105 ${esFav
@@ -222,26 +214,6 @@ export default function PaginaDetalle() {
                 </div>
             </div>
 
-            {/* Modal Compartir */}
-            <Modal estaAbierto={modalAbierto} alCerrar={() => setModalAbierto(false)} titulo="Compartir destino">
-                <div className="text-center space-y-4">
-                    <div className="bg-slate-50 rounded-xl p-4">
-                        <p className="text-sm text-slate-500 mb-2">Enlace del destino:</p>
-                        <p className="text-sm font-mono text-primary-600 break-all">
-                            {window.location.href}
-                        </p>
-                    </div>
-                    <button
-                        onClick={() => {
-                            navigator.clipboard.writeText(window.location.href);
-                            setModalAbierto(false);
-                        }}
-                        className="bg-primary-600 text-white px-6 py-3 rounded-2xl font-semibold hover:bg-primary-700 transition-colors w-full"
-                    >
-                        Copiar enlace
-                    </button>
-                </div>
-            </Modal>
         </div>
     );
 }

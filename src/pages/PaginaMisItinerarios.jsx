@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ClipboardList, MapPin, Calendar, Wallet, StickyNote, Trash2, Pencil, PlaneTakeoff, ArrowRight, Save } from 'lucide-react';
+import { ClipboardList, MapPin, Calendar, Wallet, StickyNote, Trash2, PlaneTakeoff, ArrowRight } from 'lucide-react';
 import { useItinerarios } from '@/context/ItinerariosContext';
-import Modal from '@/components/Modal';
 
 export default function PaginaMisItinerarios() {
-    const { itinerarios, eliminarItinerario, actualizarItinerario } = useItinerarios();
+    const { itinerarios, eliminarItinerario } = useItinerarios();
     const [estaSobreId, setEstaSobreId] = useState(null);
-    const [elementoEditando, setElementoEditando] = useState(null);
-    const [formularioEdicion, setFormularioEdicion] = useState({});
 
     const formatearFecha = (cadenaFecha) => {
         if (!cadenaFecha) return '';
@@ -16,32 +13,6 @@ export default function PaginaMisItinerarios() {
             day: 'numeric', month: 'short', year: 'numeric',
         });
     };
-
-    const abrirEdicion = (it) => {
-        setElementoEditando(it);
-        setFormularioEdicion({
-            fechaInicio: it.fechaInicio,
-            fechaFin: it.fechaFin,
-            presupuesto: it.presupuesto,
-            notas: it.notas || '',
-        });
-    };
-
-    const manejarCambioEdicion = (e) => {
-        const { name, value } = e.target;
-        setFormularioEdicion((prev) => ({ ...prev, [name]: value }));
-    };
-
-    const manejarEnvioEdicion = (e) => {
-        e.preventDefault();
-        actualizarItinerario(elementoEditando.id, {
-            ...formularioEdicion,
-            presupuesto: Number(formularioEdicion.presupuesto),
-        });
-        setElementoEditando(null);
-    };
-
-    const claseInput = 'w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 focus:bg-white transition-all';
 
     return (
         <div className="min-h-screen bg-slate-50">
@@ -66,7 +37,6 @@ export default function PaginaMisItinerarios() {
                                 <div className="flex items-start justify-between gap-3 mb-4">
                                     <h3 className="text-lg font-bold text-slate-900 line-clamp-2">{it.nombre}</h3>
                                     <div className="flex items-center gap-1 shrink-0">
-                                        <button onClick={() => abrirEdicion(it)} className="p-2 rounded-xl text-slate-400 hover:text-primary-600 hover:bg-primary-50 transition-colors" title="Editar itinerario"><Pencil className="h-4 w-4" /></button>
                                         <button onClick={() => eliminarItinerario(it.id)} className="p-2 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-50 transition-colors" title="Eliminar itinerario"><Trash2 className="h-4 w-4" /></button>
                                     </div>
                                 </div>
@@ -89,30 +59,6 @@ export default function PaginaMisItinerarios() {
                     </div>
                 )}
             </div>
-            <Modal estaAbierto={!!elementoEditando} alCerrar={() => setElementoEditando(null)} titulo={`Editar: ${elementoEditando?.nombre || ''}`}>
-                <form onSubmit={manejarEnvioEdicion} className="space-y-5">
-                    <div>
-                        <label htmlFor="editFechaInicio" className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2"><Calendar className="h-4 w-4 text-slate-400" />Fecha de Inicio</label>
-                        <input id="editFechaInicio" name="fechaInicio" type="date" value={formularioEdicion.fechaInicio || ''} onChange={manejarCambioEdicion} className={claseInput} />
-                    </div>
-                    <div>
-                        <label htmlFor="editFechaFin" className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2"><Calendar className="h-4 w-4 text-slate-400" />Fecha de Fin</label>
-                        <input id="editFechaFin" name="fechaFin" type="date" value={formularioEdicion.fechaFin || ''} onChange={manejarCambioEdicion} className={claseInput} />
-                    </div>
-                    <div>
-                        <label htmlFor="editPresupuesto" className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2"><Wallet className="h-4 w-4 text-slate-400" />Presupuesto (€)</label>
-                        <input id="editPresupuesto" name="presupuesto" type="number" min="0" value={formularioEdicion.presupuesto || ''} onChange={manejarCambioEdicion} className={claseInput} />
-                    </div>
-                    <div>
-                        <label htmlFor="editNotas" className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2"><StickyNote className="h-4 w-4 text-slate-400" />Notas adicionales</label>
-                        <textarea id="editNotas" name="notas" value={formularioEdicion.notas || ''} onChange={manejarCambioEdicion} rows={3} className={`${claseInput} resize-none`} />
-                    </div>
-                    <div className="flex gap-3 pt-2">
-                        <button type="button" onClick={() => setElementoEditando(null)} className="flex-1 py-3 rounded-2xl border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition-colors">Cancelar</button>
-                        <button type="submit" className="flex-1 py-3 rounded-2xl bg-primary-600 text-white font-semibold hover:bg-primary-700 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-primary-600/25"><Save className="h-4 w-4" />Guardar</button>
-                    </div>
-                </form>
-            </Modal>
         </div>
     );
 }

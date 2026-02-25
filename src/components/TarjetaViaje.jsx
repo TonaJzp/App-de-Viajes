@@ -61,7 +61,6 @@ export default function TarjetaViaje({ viaje }) {
                     <button
                         onClick={(e) => {
                             e.preventDefault();
-                            e.stopPropagation();
                             toggleFavorito(viaje.id);
                         }}
                         className={`absolute top-4 right-4 p-2.5 rounded-full backdrop-blur-md transition-all duration-200 hover:scale-110 ${esFav

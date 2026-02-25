@@ -42,7 +42,10 @@ export default function PaginaFavoritos() {
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 -mt-8 pb-20">
                 {cargando && !error && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                        {Array.from({ length: 3 }).map((_, i) => <TarjetaEsqueleto key={i} />)}
+                        {/* 3 Tarjetas de esqueleto */}
+                        <TarjetaEsqueleto />
+                        <TarjetaEsqueleto />
+                        <TarjetaEsqueleto />
                     </div>
                 )}
                 {error && (

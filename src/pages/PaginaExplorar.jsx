@@ -31,15 +31,20 @@ export default function PaginaExplorar() {
     }, [terminoBusqueda, categoriaSeleccionada]);
 
     const viajesFiltrados = viajes.filter((viaje) => {
+        // Comprueba si el nombre del viaje coincide con el término de búsqueda
         const coincideBusqueda = viaje.nombre
             .toLowerCase()
             .includes(terminoBusqueda.toLowerCase());
+        // Comprueba si la categoría del viaje coincide con la categoría seleccionada
         const coincideCategoria =
             categoriaSeleccionada === 'Todos' || viaje.categoria === categoriaSeleccionada;
         return coincideBusqueda && coincideCategoria;
     });
 
+    // Calcula el número total de páginas que van a hacer falta para mostrar todos los viajes
     const totalPaginas = Math.ceil(viajesFiltrados.length / ITEMS_POR_PAGINA);
+
+    // Calcula los viajes que se van a mostrar en la página actual
     const viajesPaginados = viajesFiltrados.slice(
         (paginaActual - 1) * ITEMS_POR_PAGINA,
         paginaActual * ITEMS_POR_PAGINA
@@ -124,9 +129,13 @@ export default function PaginaExplorar() {
                             <div className="h-5 w-44 bg-slate-200 rounded-lg animate-pulse" />
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                            {Array.from({ length: 6 }).map((_, i) => (
-                                <TarjetaEsqueleto key={i} />
-                            ))}
+                            {/* Muestra 6 esqueletos de carga */}
+                            <TarjetaEsqueleto />
+                            <TarjetaEsqueleto />
+                            <TarjetaEsqueleto />
+                            <TarjetaEsqueleto />
+                            <TarjetaEsqueleto />
+                            <TarjetaEsqueleto />
                         </div>
                     </div>
                 )}
@@ -172,6 +181,7 @@ export default function PaginaExplorar() {
                                         </button>
 
                                         <div className="flex items-center gap-1 sm:gap-1.5">
+                                            {/* Botón página 1 */}
                                             {obtenerNumerosPagina()[0] > 1 && (
                                                 <>
                                                     <button
@@ -185,6 +195,7 @@ export default function PaginaExplorar() {
                                                     )}
                                                 </>
                                             )}
+                                            {/* Botones de paginación */}
                                             {obtenerNumerosPagina().map((pagina) => (
                                                 <button
                                                     key={pagina}
@@ -197,6 +208,7 @@ export default function PaginaExplorar() {
                                                     {pagina}
                                                 </button>
                                             ))}
+                                            {/* Botón página final */}
                                             {obtenerNumerosPagina()[obtenerNumerosPagina().length - 1] < totalPaginas && (
                                                 <>
                                                     {obtenerNumerosPagina()[obtenerNumerosPagina().length - 1] < totalPaginas - 1 && (

@@ -1,0 +1,83 @@
+# Guía de Defensa del Proyecto: Posibles Preguntas y Respuestas
+
+Esta guía está diseñada para prepararte para las preguntas técnicas que tu profesor podría hacer durante la demostración en vivo de tu aplicación. Cada pregunta está enfocada en una funcionalidad visible y te dice **exactamente a qué archivo de código y concepto técnico** debes referirte.
+
+## 1. La Página de Explorar y los Filtros
+
+**Situación:** Estás enseñando cómo buscas "Playa" o seleccionas la categoría "Montaña" y los viajes se filtran automáticamente.
+**Pregunta del Profesor:** *"¿Cómo has hecho para que los filtros funcionen en tiempo real sin recargar la página? ¿Dónde está esa lógica?"*
+
+**Tu Respuesta y Dónde ir:**
+1. Ve al archivo [src/pages/PaginaExplorar.jsx](file:///c:/Users/MiniTona/Desktop/Proyecto-DWEC/proyecto-final/src/pages/PaginaExplorar.jsx).
+2. Explícale que usas el **Estado de React (`useState`)** para guardar lo que el usuario escribe (`terminoBusqueda`) y la categoría (`categoriaSeleccionada`).
+3. Muéstrale el bloque de código `const viajesFiltrados = viajes.filter(...)`.
+4. **La clave argumental:** *"He utilizado el método `.filter` de JavaScript combinado con `.includes` y `.toLowerCase`. Como estos valores están guardados en el estado de React, cada vez que el usuario escribe o hace clic en un filtro, React detecta el cambio de estado y vuelve a ejecutar automáticamente la lógica de filtrado, renderizando solo los resultados coincidentes."*
+
+---
+
+## 2. Paginación de Resultados
+
+**Situación:** Enseñas que en la parte inferior hay botones para ir a la página 1, 2, 3...
+**Pregunta del Profesor:** *"¿Cómo estás calculando qué viajes mostrar en cada página? ¿Y cómo sabes cuántas páginas hay en total?"*
+
+**Tu Respuesta y Dónde ir:**
+1. Quédate en [src/pages/PaginaExplorar.jsx](file:///c:/Users/MiniTona/Desktop/Proyecto-DWEC/proyecto-final/src/pages/PaginaExplorar.jsx).
+2. Muéstrale las constantes `totalPaginas` y `viajesPaginados` (justo debajo de los filtros).
+3. **La clave argumental:** *"Para el total de páginas, divido la longitud del array filtrado entre los ítems por página (12) y uso `Math.ceil()` para redondear hacia arriba. Para mostrar los viajes en pantalla, no uso un bucle normal, sino que aplico el método `.slice()` de los arrays de JavaScript. Multiplico la `paginaActual` por los ítems por página para saber exactamente qué índice inicial y final 'cortar' del array completo para mostrar al usuario."*
+
+---
+
+## 3. Estados de Carga (Esqueletos)
+
+**Situación:** Al hacer clic en Explorar o Favoritos, se ven unos rectángulos grises (Skeleton Loaders) durante un segundo antes de que aparezcan las fotos.
+**Pregunta del Profesor:** *"Me gusta el efecto de carga antes de mostrar los datos. ¿Cómo controlas cuándo mostrar eso y cuándo mostrar los datos reales?"*
+
+**Tu Respuesta y Dónde ir:**
+1. Ve a [src/pages/PaginaExplorar.jsx](file:///c:/Users/MiniTona/Desktop/Proyecto-DWEC/proyecto-final/src/pages/PaginaExplorar.jsx) o [PaginaFavoritos.jsx](file:///c:/Users/MiniTona/Desktop/Proyecto-DWEC/proyecto-final/src/pages/PaginaFavoritos.jsx).
+2. Muéstrale los estados policiales: `const [cargando, setCargando] = useState(true);`.
+3. Baja al `useEffect` que llama a la API. Explícale que antes de la llamada pones `setCargando(true)`, y en la instrucción `.finally(...)` de la Promesa lo pasas a `false`.
+4. **La clave argumental:** *"Uso el Renderizado Condicional de React (los operadores `&&`). En el JSX le digo: `cargando && !error && <TarjetaEsqueleto />`. Esto significa: 'Solo pinta los componentes visuales de esqueleto si el estado de carga es verdadero y no hay ningún error'. En cuanto la Promesa de la API se resuelve (`.finally`), el estado cambia a falso y React automáticamente oculta los esqueletos y muestra los datos mediante el `.map()`."*
+
+---
+
+## 4. Gestión de Favoritos (Persistencia de Estado Global)
+
+**Situación:** Haces clic en un corazón de un viaje en "Inicio". Luego vas a la pestaña "Favoritos" y el viaje aparece allí mágicamente.
+**Pregunta del Profesor:** *"Si marcas un favorito en la página de inicio, ¿cómo sabe la página de favoritos que lo has seleccionado? Si son archivos diferentes, ¿cómo se comunican los datos?"*
+
+**Tu Respuesta y Dónde ir:**
+1. Ve a [src/context/FavoritosContext.jsx](file:///c:/Users/MiniTona/Desktop/Proyecto-DWEC/proyecto-final/src/context/FavoritosContext.jsx).
+2. Explícale que para evitar pasar propiedades ("props") infinitamente entre componentes (Prop Drilling), has implementado la **API Context de React**.
+3. **La clave argumental:** *"He creado un Proveedor de Contexto (Context Provider) que envuelve toda mi aplicación. Este contexto tiene su propio estado `favoritos` (que es un array de IDs) y funciones como [toggleFavorito](file:///c:/Users/MiniTona/Desktop/Proyecto-DWEC/proyecto-final/src/context/FavoritosContext.jsx#8-14). Cualquier componente (como [TarjetaViaje](file:///c:/Users/MiniTona/Desktop/Proyecto-DWEC/proyecto-final/src/components/TarjetaViaje.jsx#22-115) en Inicio o la [PaginaFavoritos](file:///c:/Users/MiniTona/Desktop/Proyecto-DWEC/proyecto-final/src/pages/PaginaFavoritos.jsx#9-85)) puede 'engancharse' a este contexto global usando el Hook personalizado [useFavoritos](file:///c:/Users/MiniTona/Desktop/Proyecto-DWEC/proyecto-final/src/context/FavoritosContext.jsx#28-35). El archivo del Context es el único lugar donde reside y se modifica la información central, actuando como una pequeña base de datos en memoria para el navegador."*
+
+---
+
+## 5. El Botón de "Favoritos" dentro de la Tarjeta (Burbujeo)
+
+**Situación:** Haces clic en un botón de favorito y la tarjeta cambia pero no te lleva a los detalles del viaje.
+**Pregunta del Profesor:** *"Veo que la tarjeta entera es un enlace a otra página. ¿Por qué al hacer clic en el botón del corazón que está DENTRO del enlace, no te lleva a la otra página?"*
+
+**Tu Respuesta y Dónde ir:**
+1. Ve a [src/components/TarjetaViaje.jsx](file:///c:/Users/MiniTona/Desktop/Proyecto-DWEC/proyecto-final/src/components/TarjetaViaje.jsx).
+2. Busca la función `onClick` del botón `Heart`.
+3. Muéstrale la instrucción `e.preventDefault()`.
+4. **La clave argumental:** *"Esto ocurre por el Event Bubbling (burbujeo de eventos) de JavaScript y React Router. Al pulsar el botón, el componente padre (`Link`) detectaría el click y me redireccionaría. Para evitarlo, llamo a `e.preventDefault()` en el evento del botón. React Router es inteligente y al detectar que el evento por defecto ha sido prevenido, bloquea la redirección de ese `<Link>` específico, permitiendo que la lógica visual del botón de favorito se ejecute sin cambiar de ruta."*
+
+---
+
+## 6. Integración con la API Simulada
+
+**Situación:** Estás enseñando cualquier página que carga destinos.
+**Pregunta del Profesor:** *"¿De dónde salen estos datos? ¿Los tienes a fuego en el código o estás conectándote a algo externo?"*
+
+**Tu Respuesta y Dónde ir:**
+1. Ve a [src/services/api.js](file:///c:/Users/MiniTona/Desktop/Proyecto-DWEC/proyecto-final/src/services/api.js).
+2. Explícale que NO están a fuego en los componentes. Estás simulando un entorno profesional de Producción.
+3. **La clave argumental:** *"Estoy ejecutando `json-server` en el puerto 3001 como si fuera un backend real con base de datos. He creado un archivo específico (`services/api.js`) para abstraer las peticiones con Promesas (`fetch`). Así, mis componentes no saben de dónde vienen los datos, simplemente llaman a `obtenerViajes()` y esperan la Promesa. Si mañana cambiamos el backend real, solo tengo que modificar este único archivo y no tocar ningún componente visual."*
+
+***
+
+### 💡 Consejos de Oro para la Exposición
+*   **Tranquilidad:** Las preguntas nunca buscan pillarte, buscan comprobar que has entendido *por qué* suceden las cosas y que no has copiado el código de manual sin entender su lógica natural.
+*   **Apunta con el ratón:** Cuando menciones el estado o un filtro, ¡ve directo al archivo y selecciónalo con el ratón! Demuestra muchísima seguridad y dominio del proyecto.
+*   **Usa palabras clave:** Términos como *Renderizado Condicional*, *React Context API*, *Llamadas Asíncronas/Promesas*, *Estado (State)*... suman muchísimos puntos si los introduces en tu explicación.

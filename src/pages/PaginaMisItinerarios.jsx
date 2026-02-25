@@ -15,6 +15,7 @@ export default function PaginaMisItinerarios() {
     };
 
     return (
+        // Cabecera
         <div className="min-h-screen bg-slate-50">
             <div className="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 pt-12 pb-20">
@@ -29,6 +30,8 @@ export default function PaginaMisItinerarios() {
                     </p>
                 </div>
             </div>
+
+            {/* Contenido */}
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 -mt-8 pb-20">
                 {itinerarios.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
